@@ -1,0 +1,3 @@
+isort --settings-file ./Etc/isort.cfg .
+flake8 --config ./Etc/.flake8
+black --config ./Etc/.black .

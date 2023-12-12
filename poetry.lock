@@ -209,6 +209,20 @@ files = [
 ]
 
 [[package]]
+name = "pep8-naming"
+version = "0.13.3"
+description = "Check PEP-8 naming conventions, plugin for flake8"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "pep8-naming-0.13.3.tar.gz", hash = "sha256:1705f046dfcd851378aac3be1cd1551c7c1e5ff363bacad707d43007877fa971"},
+    {file = "pep8_naming-0.13.3-py3-none-any.whl", hash = "sha256:1a86b8c71a03337c97181917e2b472f0f5e4ccb06844a0d6f0a33522549e7a80"},
+]
+
+[package.dependencies]
+flake8 = ">=5.0.0"
+
+[[package]]
 name = "platformdirs"
 version = "4.1.0"
 description = "A small Python package for determining appropriate platform-specific dirs, e.g. a \"user data dir\"."
@@ -447,4 +461,4 @@ test = ["covdefaults (>=2.3)", "coverage (>=7.2.7)", "coverage-enable-subprocess
 [metadata]
 lock-version = "2.0"
 python-versions = "3.10"
-content-hash = "b3c0063066e061e7f5814219f08ed1c418e45f5598a4b4a45120ec7ac3b6b47f"
+content-hash = "7b601702982e1f807ca70f898f8b138097b6f7b8a3cd3c32188f8f322998010c"

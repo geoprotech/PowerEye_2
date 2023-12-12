@@ -5,6 +5,7 @@ from PySide6.QtWidgets import QApplication
 from Bin.Gui.Windows.MainWindow import MainWindow
 
 
+# main function
 def main():
     app = QApplication(sys.argv)
 

@@ -7,6 +7,7 @@ from Bin.Gui.Windows.MainWindow import MainWindow
 
 def main():
     app = QApplication(sys.argv)
+
     window = MainWindow()
     window.show()
 

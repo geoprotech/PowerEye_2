@@ -2,8 +2,10 @@ from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QHBoxLayout, QLabel, QMainWindow
 
 from Src.Icons import ICONS_PATH
-from Src.Styles.stylesheet import (BASE_STYLESHEET,
-                                   MAIN_WINDOW_HEADER_STYLESHEET)
+from Src.Styles.stylesheet import (
+    BASE_STYLESHEET,
+    MAIN_WINDOW_HEADER_STYLESHEET,
+)
 
 
 class MainWindow(QMainWindow):

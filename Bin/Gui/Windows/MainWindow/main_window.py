@@ -6,6 +6,10 @@ from Src.Style.stylesheet import BASE_STYLESHEET, MAIN_WINDOW_HEADER_STYLESHEET
 
 
 class MainWindow(QMainWindow):
+    """
+    Configure main window of app.
+    """
+
     def __init__(self):
         super(MainWindow, self).__init__()
         self.setGeometry(*BASE_STYLESHEET.geometry())
@@ -16,12 +20,18 @@ class MainWindow(QMainWindow):
         self.setLayout(self.box_layout)
 
         self.header = QLabel(self)
-        self.setup_header()
+        self._setup_header()
         self.box_layout.addWidget(self.header)
 
         self.setCentralWidget(self.header)
 
-    def setup_header(self):
+    def _setup_header(self):
+        """
+        Configure header of main window.
+        :return: None
+        """
         self.header.setStyleSheet(repr(MAIN_WINDOW_HEADER_STYLESHEET))
         self.header.setText("PowerEye")
-        self.header.setFixedHeight(80)
+        self.header.setFixedHeight(
+            int(MAIN_WINDOW_HEADER_STYLESHEET["height"])
+        )

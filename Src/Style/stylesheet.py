@@ -1,4 +1,8 @@
 class Stylesheet:
+    """
+    Base class for all stylesheets. Based on Template. Used for qt elements stylesheet.
+    """
+
     def __init__(self, template):
         assert type(template) is dict
         self._template = template
@@ -16,6 +20,10 @@ class Stylesheet:
         return self._template[item]
 
     def geometry(self):
+        """
+        Returns the geometry of the stylesheet for proper usage in qt widgets and windows.
+        :return list[int]:
+        """
         assert "geometry" in self._template.keys(), "No geometry in template."
         return [
             int(self._template["geometry"].split("x")[0]),
@@ -37,7 +45,8 @@ BASE_STYLESHEET = Stylesheet(BASE_STYLESHEET_TEMPLATE)
 MAIN_WINDOW_HEADER_STYLESHEET_TEMPLATE = {
     "font": "20px",
     "font-weight": "600",
-    "background-color": "#47F4FF",
+    "background-color": "#28BFC9",
+    "height": "68",
 }
 
 MAIN_WINDOW_HEADER_STYLESHEET = Stylesheet(

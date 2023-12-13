@@ -1,6 +1,6 @@
 from PySide6.QtWidgets import QWidget
 
-from Src.Style.stylesheet import BASE_STYLESHEET
+from Src.Styles.stylesheet import BASE_STYLESHEET
 
 
 class BaseWindow(QWidget):

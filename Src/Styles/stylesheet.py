@@ -10,7 +10,8 @@ class Stylesheet:
     def __str__(self):
         string_representation = ""
         for key, val in self._template.items():
-            string_representation += key + ":" + val + ";\n"
+            if key != "geometry":
+                string_representation += key + ":" + val + ";\n"
         return string_representation
 
     def __repr__(self):

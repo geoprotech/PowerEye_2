@@ -3,11 +3,10 @@ repos:
     hooks:
       - id: isort
         name: isort
-        entry: isort --settings-file ./Etc/isort.cfg .
+        entry: isort --settings-file ./Etc/isort.cfg --profile black --filter-files .
         language: system
         types: [ python ]
         pass_filenames: false
-        args: ["--profile", "black", "--filter-files"]
 
       - id: black
         name: black
@@ -28,3 +27,10 @@ repos:
     hooks:
         - id: end-of-file-fixer
         - id: check-byte-order-marker
+
+#  - repo: 'https://github.com/pre-commit/mirrors-mypy'
+#    rev: v1.7.1
+#    hooks:
+#      - id: mypy
+#        files: ^Bin/
+#        args: ["--config-file", "./Etc/mypy.ini"]

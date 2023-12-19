@@ -1,8 +1,7 @@
 import sys
 
-from PySide6.QtWidgets import QApplication
-
 from Bin.Gui.Windows.MainWindow import MainWindow
+from PySide6.QtWidgets import QApplication
 
 
 def main():

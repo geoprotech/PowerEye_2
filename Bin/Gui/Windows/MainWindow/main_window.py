@@ -1,6 +1,5 @@
 from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QHBoxLayout, QLabel, QMainWindow
-
 from Src.Icons import ICONS_PATH
 from Src.Styles.stylesheet import (
     BASE_STYLESHEET,
@@ -28,7 +27,7 @@ class MainWindow(QMainWindow):
 
         self.setCentralWidget(self.header)
 
-    def _setup_header(self):
+    def _setup_header(self) -> None:
         """
         Configure header of main window.
         :return: None

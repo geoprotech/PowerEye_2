@@ -31,6 +31,11 @@ exclude = '''
 exclude = [".git", "__pycache__", "venv", "__init__.py"]
 ignore = ["E203", "E501"]
 
+[tools.mypy]
+ignore_missing_imports = ["True"]
+warn_unreachable = ["True"]
+disallow_untyped_defs = ["True"]
+warn_return_any = ["True"]
 
 [build-system]
 requires = ["poetry-core"]

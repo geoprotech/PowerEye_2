@@ -1,7 +1,8 @@
-import Bin.Gui.Widgets.Buttons as Buttons
 import PySide6.QtCore as QtCore
 from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QHBoxLayout, QLabel, QMainWindow
+
+import Bin.Gui.Widgets.Buttons as Buttons
 from Src.Icons import ICONS_PATH
 from Src.Styles.stylesheet import (
     BASE_STYLESHEET,

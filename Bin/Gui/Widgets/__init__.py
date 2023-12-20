@@ -1,1 +1,1 @@
-from Bin.Gui.Widgets import Buttons
+from .Buttons import *

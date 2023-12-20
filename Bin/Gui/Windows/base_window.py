@@ -1,4 +1,5 @@
 from PySide6.QtWidgets import QWidget
+
 from Src.Styles.stylesheet import BASE_STYLESHEET
 
 

@@ -1,5 +1,6 @@
 from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QPushButton, QWidget
+
 from Src.Icons import ICONS_PATH
 
 

@@ -3,7 +3,7 @@ repos:
     hooks:
       - id: isort
         name: isort
-        entry: isort --settings-file ./Etc/isort.cfg --profile black --filter-files .
+        entry: isort --settings-file ./pyproject.toml --profile black --filter-files .
         language: system
         types: [ python ]
         pass_filenames: false

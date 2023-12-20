@@ -20,6 +20,17 @@ line_length = 79
 lines_after_imports = 2
 skip = ["__init__.py"]
 
+[tool.black]
+line-length = 79
+exclude = '''
+    venv/
+    Tests/
+'''
+
+[flake8]
+exclude = [".git", "__pycache__", "venv", "__init__.py"]
+ignore = ["E203", "E501"]
+
 
 [build-system]
 requires = ["poetry-core"]

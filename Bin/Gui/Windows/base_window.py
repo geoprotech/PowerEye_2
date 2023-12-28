@@ -4,7 +4,7 @@ from Src.Styles.stylesheet import BASE_STYLESHEET
 
 
 class BaseWindow(QWidget):
-    def __init__(self, title: str = "Window", geometry: str = None):
+    def __init__(self, title: str = "Window", geometry: str = ""):
         super(BaseWindow, self).__init__()
         self.setWindowTitle(title)
         if geometry:

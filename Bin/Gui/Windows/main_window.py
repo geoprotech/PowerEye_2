@@ -15,7 +15,7 @@ class MainWindow(QMainWindow):
     Configure main window of app.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         super(MainWindow, self).__init__()
         self.setGeometry(*BASE_STYLESHEET.geometry())
         self.setStyleSheet(repr(BASE_STYLESHEET))
@@ -44,5 +44,4 @@ class MainWindow(QMainWindow):
             int(MAIN_WINDOW_HEADER_STYLESHEET["height"])
         )
 
-        btn = Buttons.CloseButton(self)
-        self.box_layout.addWidget(btn)
+        Buttons.CloseButton(self.header)

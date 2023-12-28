@@ -20,15 +20,15 @@ line_length = 79
 lines_after_imports = 2
 skip = ["__init__.py"]
 
+[tool.mypy]
+ignore_missing_imports = "True"
+warn_unreachable = "True"
+disallow_untyped_defs = "True"
+warn_return_any = "True"
+
 [tool.black]
 line-length = 79
 exclude = '''venv/, Tests/'''
-
-[tools.mypy]
-ignore_missing_imports = ["True"]
-warn_unreachable = ["True"]
-disallow_untyped_defs = ["True"]
-warn_return_any = ["True"]
 
 
 [build-system]

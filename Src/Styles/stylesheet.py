@@ -3,24 +3,24 @@ class Stylesheet:
     Base class for all stylesheets. Based on Template. Used for qt elements stylesheet.
     """
 
-    def __init__(self, template):
+    def __init__(self, template: dict[str, str]) -> None:
         assert type(template) is dict
         self._template = template
 
-    def __str__(self):
+    def __str__(self) -> str:
         string_representation = ""
         for key, val in self._template.items():
             if key != "geometry":
                 string_representation += key + ":" + val + ";\n"
         return string_representation
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return str(self)
 
-    def __getitem__(self, item):
+    def __getitem__(self, item: str) -> str:
         return self._template[item]
 
-    def geometry(self):
+    def geometry(self) -> list[int]:
         """
         Returns the geometry of the stylesheet for proper usage in qt widgets and windows.
         :return list[int]:

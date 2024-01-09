@@ -1,10 +1,14 @@
+from bin.exceptions import StylesheetException
+
+
 class Stylesheet:
     """
     Base class for all stylesheets. Based on Template. Used for qt elements stylesheet.
     """
 
     def __init__(self, template: dict[str, str]) -> None:
-        assert type(template) is dict
+        if not isinstance(template, dict):
+            raise StylesheetException("Wrong type for template", "DEBUG")
         self._template = template
 
     def __str__(self) -> str:
@@ -25,12 +29,15 @@ class Stylesheet:
         Returns the geometry of the stylesheet for proper usage in qt widgets and windows.
         :return list[int]:
         """
-        assert "geometry" in self._template.keys(), "No geometry in template."
+        if "geometry" not in self._template.keys():
+            raise StylesheetException("No geometry in template", "DEBUG")
+        geometry_list = self._template["geometry"].split("x")
+
         return [
-            int(self._template["geometry"].split("x")[0]),
-            int(self._template["geometry"].split("x")[1]),
-            int(self._template["geometry"].split("x")[2]),
-            int(self._template["geometry"].split("x")[3]),
+            int(geometry_list[0]),
+            int(geometry_list[1]),
+            int(geometry_list[2]),
+            int(geometry_list[3]),
         ]
 
 
@@ -50,6 +57,22 @@ MAIN_WINDOW_HEADER_STYLESHEET_TEMPLATE = {
     "height": "68",
 }
 
-MAIN_WINDOW_HEADER_STYLESHEET = Stylesheet(
-    MAIN_WINDOW_HEADER_STYLESHEET_TEMPLATE
-)
+MAIN_WINDOW_HEADER_STYLESHEET = Stylesheet(MAIN_WINDOW_HEADER_STYLESHEET_TEMPLATE)
+
+CLOSE_BUTTON_STYLESHEET_TEMPLATE = {
+    "height": "20",
+    "border": "None",
+    "border-radius": "5",
+    "margin-right": "15",
+}
+
+CLOSE_BUTTON_STYLESHEET_TEMPLATE_HOVER = {
+    "height": "20",
+    "border": "None",
+    "border-radius": "5",
+    "margin-right": "15",
+    "background-color": "#28b3bd",
+}
+
+CLOSE_BUTTON_STYLESHEET = Stylesheet(CLOSE_BUTTON_STYLESHEET_TEMPLATE)
+CLOSE_BUTTON_STYLESHEET_HOVER = Stylesheet(CLOSE_BUTTON_STYLESHEET_TEMPLATE_HOVER)

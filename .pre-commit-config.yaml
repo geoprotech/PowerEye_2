@@ -17,7 +17,7 @@ repos:
 
       - id: flake8
         name: flake8
-        entry: flake8 --config ./Etc/.flake8 ./Bin
+        entry: flake8 --config ./etc/conf/.flake8 ./bin
         language: system
         types: [ python ]
         pass_filenames: false

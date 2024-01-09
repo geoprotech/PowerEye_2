@@ -16,19 +16,49 @@ flake8 = "^6.1.0"
 
 [tool.isort]
 include_trailing_comma = true
-line_length = 79
 lines_after_imports = 2
+line_length = 120
+combine_as_imports = true
+order_by_type = true
+length_sort_straight = true
+use_parentheses = true
+multi_line_output = 3
+known_local_folder = ['bin', 'src', 'tests']
+extend_skip = ["*pypoetry*"]
 skip = ["__init__.py"]
 
 [tool.mypy]
-ignore_missing_imports = "True"
-warn_unreachable = "True"
-disallow_untyped_defs = "True"
-warn_return_any = "True"
+strict_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+check_untyped_defs = true
+disallow_untyped_defs = true
+disallow_any_generics = true
+no_implicit_reexport = false
+warn_unreachable = true
+warn_return_any = true
+
+[[tool.mypy.overrides]]
+module = [
+    "PySide6.*",
+]
+ignore_missing_imports = true
 
 [tool.black]
-line-length = 79
-exclude = '''venv/, Tests/'''
+line-length = 120
+skip-string-normalization = true
+exclude = '''
+^/(
+  (
+    | \.git
+    | \.mypy_cache
+    | \.pytest_cache
+    | \.venv
+    | venv
+    | backend_utils
+  )/
+)
+'''
 
 
 [build-system]

@@ -2,13 +2,15 @@ import sys
 
 from PySide6.QtWidgets import QApplication
 
-from Bin.Gui.Windows import MainWindow
+from bin.gui.windows import MainWindow
 
 
 def main():
     app = QApplication(sys.argv)
+
     window = MainWindow()
-    window.show()
+    window.create_window()
+
     app.exec()
 
 

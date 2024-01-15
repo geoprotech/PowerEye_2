@@ -1,0 +1,4 @@
+from .object import (
+    MAIN_WINDOW_STYLESHEET,
+    MAIN_WINDOW_HEADER_STYLESHEET,
+)

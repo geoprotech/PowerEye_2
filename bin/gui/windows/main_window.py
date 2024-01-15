@@ -4,7 +4,7 @@ from PySide6.QtWidgets import QHBoxLayout, QLabel, QMainWindow
 
 import bin.gui.widgets.buttons as buttons
 from src.icons import ICONS_PATH
-from src.styles import BASE_STYLESHEET, MAIN_WINDOW_HEADER_STYLESHEET
+from src.styles.components.windows import MAIN_WINDOW_HEADER_STYLESHEET, MAIN_WINDOW_STYLESHEET
 
 
 class MainWindow(QMainWindow):
@@ -16,9 +16,9 @@ class MainWindow(QMainWindow):
         super(MainWindow, self).__init__()
         self.header_layout = QHBoxLayout()
 
-    def create_window(self):
-        self.setGeometry(*BASE_STYLESHEET.geometry())
-        self.setStyleSheet(repr(BASE_STYLESHEET))
+    def generate(self):
+        self.setGeometry(*MAIN_WINDOW_STYLESHEET.geometry())
+        self.setStyleSheet(repr(MAIN_WINDOW_STYLESHEET))
         self.setWindowTitle("PowerEye 2.0")
         self.setWindowIcon(QIcon(str(ICONS_PATH.joinpath("skyrus_logo.png"))))
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint)

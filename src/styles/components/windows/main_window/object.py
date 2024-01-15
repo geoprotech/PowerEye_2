@@ -1,0 +1,6 @@
+from .template import *
+from src.styles import Stylesheet
+
+
+MAIN_WINDOW_STYLESHEET = Stylesheet(MAIN_WINDOW_STYLESHEET_TEMPLATE)
+MAIN_WINDOW_HEADER_STYLESHEET = Stylesheet(MAIN_WINDOW_HEADER_STYLESHEET_TEMPLATE)

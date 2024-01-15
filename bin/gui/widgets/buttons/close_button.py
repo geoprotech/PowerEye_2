@@ -3,7 +3,7 @@ from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QPushButton, QWidget
 
 from src.icons import ICONS_PATH
-from src.styles.components.widgets.buttons.close_button import CLOSE_BUTTON_STYLESHEET, CLOSE_BUTTON_STYLESHEET_HOVER
+from src.styles.components.widgets.buttons import CLOSE_BUTTON_STYLESHEET, CLOSE_BUTTON_STYLESHEET_HOVER
 
 
 class CloseButton(QPushButton):

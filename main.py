@@ -9,7 +9,7 @@ def main():
     app = QApplication(sys.argv)
 
     window = MainWindow()
-    window.generate()
+    window.make()
 
     app.exec()
 

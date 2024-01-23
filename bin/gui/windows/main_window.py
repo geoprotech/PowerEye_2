@@ -3,6 +3,7 @@ from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QHBoxLayout, QLabel, QMainWindow
 
 import bin.gui.widgets.buttons as buttons
+import bin.gui.widgets.layouts as layouts
 from src.icons import ICONS_PATH
 from src.styles.components.windows import MAIN_WINDOW_HEADER_STYLESHEET, MAIN_WINDOW_STYLESHEET
 
@@ -33,12 +34,9 @@ class MainWindow(QMainWindow):
         :return: None
         """
         # Configure header background
-        header_background = QLabel()
-        header_background.setStyleSheet(repr(MAIN_WINDOW_HEADER_STYLESHEET))
-        header_background.setFixedHeight(int(MAIN_WINDOW_HEADER_STYLESHEET["height"]))
-        header_background.setLayout(self.header_layout)
-        self.setCentralWidget(header_background)
+        main_layout = layouts.MainLayout(self)
+        # header_layout = layouts.HeaderLayout(self)
 
-        # Configure close_button
-        close_btn = buttons.CloseButton(header_background)
-        self.header_layout.addWidget(close_btn, alignment=QtCore.Qt.AlignRight)
+        self.setCentralWidget(main_layout)
+
+

@@ -1,25 +1,15 @@
-import PySide6.QtCore as QtCore
-from PySide6.QtWidgets import QWidget
 from PySide6.QtCore import Qt
+from PySide6.QtWidgets import QWidget
 
 from .base import BaseLayout
 
 
 class VerticalLayout(BaseLayout):
-
     def __init__(self, parent: QWidget):
         super().__init__(parent=parent, layout_type="VBox")
 
-    def add_widget(self, widget: QWidget,
-                   stretch: int = 0,
-                   alignment: Qt.AlignmentFlag = Qt.AlignCenter
-                   ) -> None:
+    def add_widget(self, widget: QWidget, stretch: int = 0, alignment: Qt.AlignmentFlag = Qt.AlignCenter) -> None:
         self._layout.addWidget(widget, stretch, alignment)
 
     def make(self):
         self.setStyleSheet("background-color: #000000;")
-
-
-
-
-

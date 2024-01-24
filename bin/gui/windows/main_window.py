@@ -1,11 +1,10 @@
 import PySide6.QtCore as QtCore
 from PySide6.QtGui import QIcon
-from PySide6.QtWidgets import QHBoxLayout, QLabel, QMainWindow
+from PySide6.QtWidgets import QMainWindow
 
-import bin.gui.widgets.buttons as buttons
 import bin.gui.widgets.layouts as layouts
 from src.icons import ICONS_PATH
-from src.styles.components.windows import MAIN_WINDOW_HEADER_STYLESHEET, MAIN_WINDOW_STYLESHEET
+from src.styles.components.windows import MAIN_WINDOW_STYLESHEET
 
 
 class MainWindow(QMainWindow):
@@ -37,5 +36,3 @@ class MainWindow(QMainWindow):
         # header_layout = layouts.HeaderLayout(self)
 
         self.setCentralWidget(main_layout)
-
-

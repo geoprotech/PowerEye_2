@@ -15,7 +15,6 @@ class MainWindow(QMainWindow):
 
     def __init__(self) -> None:
         super(MainWindow, self).__init__()
-        self.header_layout = QHBoxLayout()
 
     def make(self):
         self.setGeometry(*MAIN_WINDOW_STYLESHEET.geometry())

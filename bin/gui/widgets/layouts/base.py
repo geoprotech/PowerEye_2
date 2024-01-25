@@ -18,7 +18,6 @@ class BaseLayout(QFrame):
     def __init__(self, parent: QWidget, layout_type: Literal["HBox", "VBox", "Grid", "Stacked"]):
         super(BaseLayout, self).__init__(parent=parent)
         self._layout = BaseLayout.layout_types[layout_type]()  # protected
-        print(self._layout)
 
         self.make()
         self.show()

@@ -1,4 +1,5 @@
 from abc import abstractmethod
+from typing import Callable
 
 from PySide6.QtWidgets import QPushButton, QWidget
 
@@ -31,8 +32,10 @@ class BaseButton(QPushButton):
 
     TOOLTIP_TEXT: str
 
-    def __init__(self, parent: QWidget):
+    def __init__(self, parent: QWidget, onclick: Callable or None = None):
         super(BaseButton, self).__init__(parent=parent)
+        if onclick:
+            self.clicked.connect(onclick)
         self.make()
         self.show()
 
@@ -59,3 +62,6 @@ class BaseButton(QPushButton):
         if hasattr(self, "FOCUS_OFF"):
             self.setStyleSheet(str(self.FOCUS_OFF))
         return super(BaseButton, self).focusOutEvent(event)
+
+    def change_onclick_event(self, func: Callable):
+        self.clicked.connect(func)

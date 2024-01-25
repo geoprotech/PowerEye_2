@@ -1,7 +1,7 @@
-from ..stub import Color
 from .base_horizontal_layout import HorizontalLayout
 from .base_vertical_layout import VerticalLayout
 from .header_layout import HeaderLayout
+from .left_menu import LeftMenu
 from .main_workspace import MainWorkspaceLayout
 
 
@@ -11,15 +11,15 @@ class MainLayout(VerticalLayout):
     """
 
     def make(self):
+        main_layout = MainWorkspaceLayout(parent=self)
         self.set_content_margins(0, 0, 0, 0)
 
         main_window = HorizontalLayout(parent=self)
 
         main_window.set_content_margins(0, 0, 0, 0)
-        main_window.add_widget(Color('red'), stretch=1)
+        main_window.add_widget(LeftMenu(parent=self))
 
-        main_layout = MainWorkspaceLayout(parent=self)
-        main_window.add_widget(main_layout, stretch=10)
+        main_window.add_widget(main_layout)
 
         self.add_widget(HeaderLayout(parent=self))
         self.add_widget(main_window)

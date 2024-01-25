@@ -10,8 +10,9 @@ class CloseButton(BaseButton):
     HOVER_ON = CLOSE_BUTTON_STYLESHEET_HOVER
     HOVER_OFF = CLOSE_BUTTON_STYLESHEET
 
+    def __init__(self, parent):
+        super().__init__(parent=parent, onclick=QtCore.QCoreApplication.instance().quit)
+
     def make(self):
         self.setIcon(QIcon(str(ICONS_PATH.joinpath("close_button.png"))))
         self.setStyleSheet(str(CLOSE_BUTTON_STYLESHEET))
-
-        self.clicked.connect(QtCore.QCoreApplication.instance().quit)

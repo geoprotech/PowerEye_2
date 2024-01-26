@@ -32,10 +32,12 @@ class BaseButton(QPushButton):
 
     TOOLTIP_TEXT: str
 
-    def __init__(self, parent: QWidget, onclick: Callable or None = None):
+    def __init__(self, parent: QWidget, onclick: Callable or None = None, tooltip: str or None = None):
         super(BaseButton, self).__init__(parent=parent)
         if onclick:
             self.clicked.connect(onclick)
+        if tooltip:
+            self.setToolTip(tooltip)
         self.make()
         self.show()
 

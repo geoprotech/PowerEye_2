@@ -18,21 +18,23 @@ class LeftMenu(VerticalLayout):
         self.setStyleSheet(str(LEFT_MENU_STYLESHEET))
         self.setFixedWidth(int(LEFT_MENU_STYLESHEET['width']))
 
-        # self.buttons["stats"].change_onclick_event(MainWorkspaceLayout.instance.switch_to_stats.emit)
         for button in self.buttons.values():
             self.add_widget(button, alignment=QtCore.Qt.AlignTop)
 
     def init_buttons(self):
         self.buttons = {
-            "menu": buttons.MenuButton(self),
-            "enter_data": buttons.EnterDataButton(self),
-            "parameters": buttons.ParametersButton(self),
-            "trajectory": buttons.TrajectoryButton(self),
-            "tnd": buttons.TndButton(self),
-            "mask_group": buttons.MaskGroupButton(self),
-            "custom_graph": buttons.CustomGraphButton(self),
-            "stats": buttons.StatsButton(self),
+            "menu": buttons.LeftMenuBaseIconButton(self, "menu_lines.png", tooltip="Меню"),
+            "enter_data": buttons.LeftMenuBaseIconButton(self, "enter_data_button.png", tooltip="Данные"),
+            "parameters": buttons.LeftMenuBaseIconButton(self, "parameters_button.png", tooltip="Параметры"),
+            "trajectory": buttons.LeftMenuBaseIconButton(self, "trajectory_button.png", tooltip="Траектория"),
+            "tnd": buttons.LeftMenuBaseIconButton(self, "tnd_graph_button.png", tooltip="T&D модель"),
+            "mask_group": buttons.LeftMenuBaseIconButton(self, "mask_group_button.png", tooltip="хз"),
+            "custom_graph": buttons.LeftMenuBaseIconButton(
+                self, "custom_graph_button.png", tooltip="Пользовательский график"
+            ),
+            "stats": buttons.LeftMenuBaseIconButton(self, "stats_button.png", tooltip="Статистика"),
         }
+        # подключаем ивенты
         self.buttons["menu"].change_onclick_event(MainWorkspaceLayout.instance.switch_to_menu.emit)
         self.buttons["enter_data"].change_onclick_event(MainWorkspaceLayout.instance.switch_to_enter_data.emit)
         self.buttons["parameters"].change_onclick_event(MainWorkspaceLayout.instance.switch_to_parameters.emit)

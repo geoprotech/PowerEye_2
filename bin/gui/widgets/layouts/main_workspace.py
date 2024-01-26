@@ -5,8 +5,13 @@ from .base_stacked_layout import StackedLayout
 
 
 class MainWorkspaceLayout(StackedLayout):
+    """
+    Singleton class: instance contains instance
+    """
+
     instance = None
 
+    # signals from buttons or other widgets to switch buttons
     switch_to_menu = QtCore.Signal()
     switch_to_enter_data = QtCore.Signal()
     switch_to_parameters = QtCore.Signal()
@@ -22,6 +27,11 @@ class MainWorkspaceLayout(StackedLayout):
         return cls.instance
 
     def make(self):
+        self.__create_tabs()
+        self.switch_tab("menu")
+        self.__connect_tabs_to_signals()
+
+    def __create_tabs(self):
         self.add_tab(Color("red"), tab_name="menu")
         self.add_tab(Color("orange"), tab_name="enter_data")
         self.add_tab(Color("yellow"), tab_name="parameters")
@@ -30,7 +40,8 @@ class MainWorkspaceLayout(StackedLayout):
         self.add_tab(Color("purple"), tab_name="mask_group")
         self.add_tab(Color("gray"), tab_name="custom_graph")
         self.add_tab(Color("pink"), tab_name="stats")
-        self.switch_tab("menu")
+
+    def __connect_tabs_to_signals(self):
         self.switch_to_menu.connect(self.on_switch_to_menu)
         self.switch_to_enter_data.connect(self.on_switch_to_enter_data)
         self.switch_to_parameters.connect(self.on_switch_to_parameters)

@@ -1,4 +1,0 @@
-from .object import (
-    CLOSE_BUTTON_STYLESHEET,
-    CLOSE_BUTTON_STYLESHEET_HOVER,
-)

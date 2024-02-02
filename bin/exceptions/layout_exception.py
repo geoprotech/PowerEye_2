@@ -1,8 +1,7 @@
-class LayoutException(Exception):
-    def __init__(self, text: str, level: str) -> None:
-        super(LayoutException, self).__init__(text)
-        self.text = text
-        self.level = level
+from .base_powereye_exception import BasePowereyeException
 
-    def __str__(self) -> str:
-        return f"{self.level}: {self.text}"
+
+class LayoutException(BasePowereyeException):
+    """
+    Use to through errors in layout exceptions
+    """

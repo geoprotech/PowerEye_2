@@ -1,14 +1,15 @@
 LEFT_MENU_BUTTON_STYLESHEET_TEMPLATE = {
-    "height": "44",
-    "width": "44",
+    "height": "100%",
+    "width": "100%",
     "border": "None",
     "border-radius": "5",
     # "margin-right": "15",
+    "margin-top": "0",
 }
 
 LEFT_MENU_BUTTON_STYLESHEET_TEMPLATE_HOVER = {
-    "height": "44",
-    "width": "44",
+    "height": "100%",
+    "width": "100%",
     "border": "None",
     "border-radius": "5",
     "font-family": "Oxanium",

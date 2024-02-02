@@ -1,6 +1,6 @@
 from PySide6.QtWidgets import QWidget
 
-from ....exceptions.layout_exception import LayoutException
+import bin.exceptions as exceptions
 from .base import BaseLayout
 
 
@@ -21,7 +21,7 @@ class StackedLayout(BaseLayout):
     def __init__(self, parent: QWidget):
         self.__number_of_tabs = 0
         self.tabs = {}
-        super(StackedLayout, self).__init__(parent=parent, layout_type="Stacked")
+        super().__init__(parent=parent, layout_type="Stacked")
 
     def add_tab(self, widget: QWidget, tab_name: str) -> None:
         """
@@ -31,7 +31,7 @@ class StackedLayout(BaseLayout):
         @return: None
         """
         if tab_name in self.tabs:
-            raise LayoutException(text="Tab with name '{}' already exist.".format(tab_name), level=1)
+            raise exceptions.LayoutException(text=f"Tab with name '{tab_name}' already exist.", level=exceptions.ERROR)
         self._layout.addWidget(widget)
         self.tabs[tab_name] = self.__number_of_tabs
         self.__number_of_tabs += 1
@@ -43,6 +43,12 @@ class StackedLayout(BaseLayout):
         @return:
         """
         self._layout.setCurrentIndex(self.tabs[tab_name])
+
+    def add_widget(self, widget: QWidget, *args, **kwargs):
+        """
+        use  add_tab
+        """
+        # ToDo: through exception
 
     def make(self):
         pass

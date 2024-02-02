@@ -11,15 +11,15 @@ class MainLayout(VerticalLayout):
     """
 
     def make(self):
-        main_layout = MainWorkspaceLayout(parent=self)
         self.set_content_margins(0, 0, 0, 0)
 
-        main_window = HorizontalLayout(parent=self)
+        main_layout = MainWorkspaceLayout(parent=self)
 
+        main_window = HorizontalLayout(parent=self)
         main_window.set_content_margins(0, 0, 0, 0)
         main_window.add_widget(LeftMenu(parent=self))
 
+        self.add_widget(HeaderLayout(parent=self))
         main_window.add_widget(main_layout)
 
-        self.add_widget(HeaderLayout(parent=self))
         self.add_widget(main_window)

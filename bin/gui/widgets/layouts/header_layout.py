@@ -12,7 +12,7 @@ class HeaderLayout(HorizontalLayout):
 
     def make(self):
         self.setFixedHeight(int(MAIN_WINDOW_HEADER_STYLESHEET["height"]))
-        # self.setStyleSheet(str(MAIN_WINDOW_HEADER_STYLESHEET))
+        self.setStyleSheet(str(MAIN_WINDOW_HEADER_STYLESHEET))
 
         logo_layout = HorizontalLayout(self)
         buttons_layout = HorizontalLayout(self)

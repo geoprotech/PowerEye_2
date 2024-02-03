@@ -23,6 +23,11 @@ class StackedLayout(BaseLayout):
         self.tabs = {}
         super().__init__(parent=parent, layout_type="Stacked")
 
+    def make(self):
+        """
+        Function to create and configure layout. Must be overridden
+        """
+
     def add_tab(self, widget: QWidget, tab_name: str) -> None:
         """
         add new tab
@@ -48,7 +53,4 @@ class StackedLayout(BaseLayout):
         """
         use  add_tab
         """
-        # ToDo: through exception
-
-    def make(self):
-        pass
+        raise exceptions.LayoutException(text="Wrong method. Use StackedLayout.add_tab()", level=exceptions.WARN)

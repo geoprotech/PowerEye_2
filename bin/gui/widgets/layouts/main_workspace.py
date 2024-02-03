@@ -14,6 +14,7 @@ class MainWorkspaceLayout(StackedLayout):
 
     instance = None
 
+    # signals to accept events from buttons in ./left_menu.py
     switch_to_menu = QtCore.Signal()
     switch_to_enter_data = QtCore.Signal()
     switch_to_parameters = QtCore.Signal()
@@ -24,6 +25,9 @@ class MainWorkspaceLayout(StackedLayout):
     switch_to_stats = QtCore.Signal()
 
     def __new__(cls, *args, **kwargs):
+        """
+        to create only one instance of this class
+        """
         if not cls.instance:
             cls.instance = super(MainWorkspaceLayout, cls).__new__(cls, *args, **kwargs)
         return cls.instance
@@ -34,11 +38,17 @@ class MainWorkspaceLayout(StackedLayout):
         self.__connect_tabs_to_signals()
 
     def __create_tabs(self):
+        """
+        сейчас забито пустышками, далее будут реальные вкладки
+        """
         tab_colors = ["red", "orange", "yellow", "green", "blue", "purple", "gray", "pink"]
         for color, name in zip(tab_colors, TAB_NAMES):
             self.add_tab(Color(color), tab_name=name)
 
     def __connect_tabs_to_signals(self):
+        """
+        connect tabs to signals
+        """
         self.switch_to_menu.connect(lambda: self.switch_tab("menu"))
         self.switch_to_enter_data.connect(lambda: self.switch_tab("enter_data"))
         self.switch_to_parameters.connect(lambda: self.switch_tab("parameters"))

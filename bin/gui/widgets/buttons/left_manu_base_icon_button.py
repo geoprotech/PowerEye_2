@@ -10,17 +10,17 @@ class LeftMenuBaseIconButton(BaseButton):
     HOVER_ON = LEFT_MENU_BUTTON_STYLESHEET_HOVER
     HOVER_OFF = LEFT_MENU_BUTTON_STYLESHEET
 
-    def __init__(self, parent, icon_name: str, tooltip: str or None = None):
+    def __init__(self, parent, icon: str, tooltip: str or None = None):
         """
         @param parent: QWidget parent
         @param icon_name: name of file from icons folder
         @param tooltip: string of tooltip (optionally)
         """
-        self.__icon_name = icon_name
+        self.__icon = icon
         super().__init__(parent=parent, tooltip=tooltip)
 
     def make(self):
-        self.setIcon(QIcon(str(ICONS_PATH.joinpath(self.__icon_name))))
+        self.setIcon(QIcon(str(ICONS_PATH.joinpath(self.__icon))))
         self.setStyleSheet(str(LEFT_MENU_BUTTON_STYLESHEET))
         size = self.size()
         icon_width = int(size.width())

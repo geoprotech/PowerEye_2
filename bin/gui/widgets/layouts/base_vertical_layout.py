@@ -20,6 +20,11 @@ class VerticalLayout(BaseLayout):
     def __init__(self, parent: QWidget):
         super().__init__(parent=parent, layout_type="VBox")
 
+    def make(self):
+        """
+        Function to create and configure layout. Must be overridden
+        """
+
     def add_widget(self, widget: QWidget, stretch: int = 0, alignment: Qt.AlignmentFlag | None = None) -> None:
         """
         adds a widget to the layout
@@ -32,6 +37,3 @@ class VerticalLayout(BaseLayout):
             self._layout.addWidget(widget, stretch, alignment)
         else:
             self._layout.addWidget(widget, stretch=stretch)
-
-    def make(self):
-        pass

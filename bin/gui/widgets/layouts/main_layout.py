@@ -11,15 +11,37 @@ class MainLayout(VerticalLayout):
     """
 
     def make(self):
+        """
+        brief:
+
+        1. self contain:
+                -------------------------------------------
+                |            HeaderLayout                 |
+                -------------------------------------------
+                |            main_window                  |
+                -------------------------------------------
+
+
+        2. main window contain:
+                -----------------------------------------------
+                |  LeftMenu  |          main_layout          |
+                -----------------------------------------------
+
+        @return:
+        """
         self.set_content_margins(0, 0, 0, 0)
 
-        main_layout = MainWorkspaceLayout(parent=self)
-
+        # main window creation
         main_window = HorizontalLayout(parent=self)
         main_window.set_content_margins(0, 0, 0, 0)
-        main_window.add_widget(LeftMenu(parent=self))
 
-        self.add_widget(HeaderLayout(parent=self))
+        # under header
+        main_layout = MainWorkspaceLayout(parent=self)
+
+        # add widgets to main layout
+        main_window.add_widget(LeftMenu(parent=self))
         main_window.add_widget(main_layout)
 
+        # add header and main layout
+        self.add_widget(HeaderLayout(parent=self))
         self.add_widget(main_window)

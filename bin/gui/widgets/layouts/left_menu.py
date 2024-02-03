@@ -8,14 +8,14 @@ from src.styles.components.widgets import LEFT_MENU_STYLESHEET
 
 
 BUTTONS_CONFIG = {
-    "menu": {"icon": icons.menu_button_icon, "tooltip": "Меню"},
-    "enter_data": {"icon": icons.enter_data_button_icon, "tooltip": "Данные"},
-    "parameters": {"icon": icons.parameters_button_icon, "tooltip": "Параметры"},
-    "trajectory": {"icon": icons.trajectory_button_icon, "tooltip": "Траектория"},
-    "tnd": {"icon": icons.tnd_button_icon, "tooltip": "T&D модель"},
-    "mask_group": {"icon": icons.mask_group_button_icon, "tooltip": "Дифф. подлипания"},
-    "custom_graph": {"icon": icons.custom_graph_button_icon, "tooltip": "Пользовательский график"},
-    "stats": {"icon": icons.stats_button_icon, "tooltip": "Статистика"},
+    "menu": {"kwargs": {"icon": icons.menu_button_icon, "tooltip": "Меню"}},
+    "enter_data": {"kwargs": {"icon": icons.enter_data_button_icon, "tooltip": "Данные"}},
+    "parameters": {"kwargs": {"icon": icons.parameters_button_icon, "tooltip": "Параметры"}},
+    "trajectory": {"kwargs": {"icon": icons.trajectory_button_icon, "tooltip": "Траектория"}},
+    "tnd": {"kwargs": {"icon": icons.tnd_button_icon, "tooltip": "T&D модель"}},
+    "mask_group": {"kwargs": {"icon": icons.mask_group_button_icon, "tooltip": "Дифф. подлипания"}},
+    "custom_graph": {"kwargs": {"icon": icons.custom_graph_button_icon, "tooltip": "Пользовательский график"}},
+    "stats": {"kwargs": {"icon": icons.stats_button_icon, "tooltip": "Статистика"}},
 }
 
 
@@ -38,8 +38,7 @@ class LeftMenu(VerticalLayout):
 
     def init_buttons(self):
         self.buttons = {
-            name: buttons.LeftMenuBaseIconButton(self, info["icon"], tooltip=info["tooltip"])
-            for name, info in BUTTONS_CONFIG.items()
+            name: buttons.LeftMenuBaseIconButton(self, **kwargs_["kwargs"]) for name, kwargs_ in BUTTONS_CONFIG.items()
         }
 
         self.buttons["menu"].add_onclick_event(MainWorkspaceLayout.instance.switch_to_menu.emit)

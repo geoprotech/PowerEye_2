@@ -1,10 +1,10 @@
 import PySide6.QtCore as QtCore
 from PySide6.QtGui import QIcon
-from PySide6.QtWidgets import QHBoxLayout, QLabel, QMainWindow
+from PySide6.QtWidgets import QMainWindow
 
-import bin.gui.widgets.buttons as buttons
+import bin.gui.widgets.layouts as layouts
 from src.icons import ICONS_PATH
-from src.styles import BASE_STYLESHEET, MAIN_WINDOW_HEADER_STYLESHEET
+from src.styles.components.windows import MAIN_WINDOW_STYLESHEET
 
 
 class MainWindow(QMainWindow):
@@ -13,12 +13,11 @@ class MainWindow(QMainWindow):
     """
 
     def __init__(self) -> None:
-        super(MainWindow, self).__init__()
-        self.header_layout = QHBoxLayout()
+        super().__init__()
 
-    def create_window(self):
-        self.setGeometry(*BASE_STYLESHEET.geometry())
-        self.setStyleSheet(repr(BASE_STYLESHEET))
+    def make(self):
+        self.setGeometry(*MAIN_WINDOW_STYLESHEET.geometry())
+        self.setStyleSheet(str(MAIN_WINDOW_STYLESHEET))
         self.setWindowTitle("PowerEye 2.0")
         self.setWindowIcon(QIcon(str(ICONS_PATH.joinpath("skyrus_logo.png"))))
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
@@ -33,12 +32,7 @@ class MainWindow(QMainWindow):
         :return: None
         """
         # Configure header background
-        header_background = QLabel()
-        header_background.setStyleSheet(repr(MAIN_WINDOW_HEADER_STYLESHEET))
-        header_background.setFixedHeight(int(MAIN_WINDOW_HEADER_STYLESHEET["height"]))
-        header_background.setLayout(self.header_layout)
-        self.setCentralWidget(header_background)
+        main_layout = layouts.MainLayout(self)
+        # header_layout = layouts.HeaderLayout(self)
 
-        # Configure close_button
-        close_btn = buttons.CloseButton(header_background)
-        self.header_layout.addWidget(close_btn, alignment=QtCore.Qt.AlignRight)
+        self.setCentralWidget(main_layout)

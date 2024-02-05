@@ -1,3 +1,5 @@
+from typing import Dict
+
 import PySide6.QtCore as QtCore
 
 import src.icons as icons
@@ -21,7 +23,7 @@ BUTTONS_CONFIG = {
 
 class LeftMenu(VerticalLayout):
     def __init__(self, parent):
-        self.buttons: dict[buttons.LeftMenuBaseIconButton] = {}
+        self.buttons: Dict[buttons.LeftMenuIconButton] = {}
         self.button_names = list(BUTTONS_CONFIG.keys())
         super().__init__(parent=parent)
 
@@ -34,11 +36,11 @@ class LeftMenu(VerticalLayout):
         self._layout.setSpacing(0)
 
         for button in self.buttons.values():
-            self.add_widget(button, alignment=QtCore.Qt.AlignTop)
+            self.add_widget(button, alignment=QtCore.Qt.AlignTop)  # noqa
 
     def init_buttons(self):
         self.buttons = {
-            name: buttons.LeftMenuBaseIconButton(self, **kwargs_["kwargs"]) for name, kwargs_ in BUTTONS_CONFIG.items()
+            name: buttons.LeftMenuIconButton(self, **kwargs_["kwargs"]) for name, kwargs_ in BUTTONS_CONFIG.items()
         }
 
         self.buttons["menu"].add_onclick_event(MainWorkspaceLayout.instance.switch_to_menu.emit)

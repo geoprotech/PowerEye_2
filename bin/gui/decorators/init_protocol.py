@@ -1,13 +1,20 @@
 def init_protocol(cls):
+    """
+    FOR GUI BASE CLASSES
+    decorator for classes that implement:
+    1. cls.__init__()
+    2. cls.post_setup()
+    3. cls.make()
+    4. cls.show()
+    after creation an instance
+    """
+
     class WrappedClass(cls):
         def __init__(self, *args, **kwargs):
-            if hasattr(cls, '__init__'):
-                super().__init__(*args, **kwargs)
-                self.post_setup()
-                self.make()
-                self.show()
-            else:
-                raise AttributeError(f"{cls.__name__} has no __init__ method")
+            super().__init__(*args, **kwargs)
+            self.post_setup()
+            self.make()
+            self.show()
 
         def post_setup(self):
             if hasattr(cls, 'post_setup'):

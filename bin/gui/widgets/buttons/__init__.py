@@ -1,2 +1,2 @@
 from .close_button import CloseButton
-from .left_manu_base_icon_button import LeftMenuBaseIconButton
+from .left_manu_button_icon_button import LeftMenuIconButton

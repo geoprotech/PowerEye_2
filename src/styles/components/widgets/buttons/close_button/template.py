@@ -1,6 +1,6 @@
 CLOSE_BUTTON_STYLESHEET_TEMPLATE = {
-    "height": "22",
-    "width": "22",
+    "height": "15",
+    "width": "15",
     "border": "None",
     "border-radius": "5",
     "margin-right": "15",

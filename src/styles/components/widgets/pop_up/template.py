@@ -1,7 +1,6 @@
 POP_UP_HEADER_STYLESHEET_TEMPLATE = {
-    "font": "10px",
     "width": "100%",
-    "font-weight": "600",
+    "font-weight": "100",
     "background-color": "#28BFC9",
-    "height": "10",
+    "height": "30",
 }

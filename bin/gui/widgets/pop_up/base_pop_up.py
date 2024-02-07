@@ -1,6 +1,6 @@
 import sys
 
-from PySide6.QtCore import Qt
+from PySide6.QtCore import QSize, Qt
 from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QApplication, QDialog, QLabel, QMainWindow, QPushButton, QVBoxLayout, QWidget
 
@@ -9,34 +9,39 @@ from bin.gui.widgets.layouts import HeaderLayout, VerticalLayout
 from bin.gui.widgets.layouts.base_horizontal_layout import HorizontalLayout
 from bin.gui.widgets.stub import Color
 from src.icons import ICONS_PATH
-from src.styles.components.widgets.buttons import CLOSE_BUTTON_STYLESHEET, CLOSE_BUTTON_STYLESHEET_HOVER
+from src.styles.components.widgets.buttons import POP_CLOSE_BUTTON_STYLESHEET, POP_CLOSE_BUTTON_STYLESHEET_HOVER
 from src.styles.components.widgets.pop_up.object import POP_UP_HEADER_STYLESHEET
 
 
 class CloseButtonPopUp(buttons.BaseButton):
-    HOVER_ON = CLOSE_BUTTON_STYLESHEET_HOVER
-    HOVER_OFF = CLOSE_BUTTON_STYLESHEET
+    HOVER_ON = POP_CLOSE_BUTTON_STYLESHEET_HOVER
+    HOVER_OFF = POP_CLOSE_BUTTON_STYLESHEET
 
-    def __init__(self, parent):
-        super().__init__(parent=parent, onclick=self.close_pop_up)
+    def __init__(self, parent, onclick):
+        super().__init__(parent=parent, onclick=onclick)
         self.parent = parent
 
-    def close_pop_up(self):
-        self.clicked.connect(self.parent.parent.close())
+    # def close_pop_up(self):
+    #     self.clicked.connect()
 
     def make(self):
         self.setIcon(QIcon(str(ICONS_PATH.joinpath("close_button.png"))))
-        self.setStyleSheet(str(CLOSE_BUTTON_STYLESHEET))
+        self.setStyleSheet(str(POP_CLOSE_BUTTON_STYLESHEET))
+        self.setFixedHeight(int(POP_CLOSE_BUTTON_STYLESHEET['height']))
+        size = self.size()
+        icon_width = int(size.width())
+        icon_height = int(size.height())
+        self.setIconSize(QSize(icon_width, icon_height))
 
 
 class HeaderLayoutPopUp(HeaderLayout):
     def __init__(self, parent):
-        super().__init__(parent=parent)
         self.parent = parent
+        super().__init__(parent=parent)  # super().__init__ -> -> post_setup -> make -> show
 
     def make(self):
-        # self.setFixedHeight(45)
         self.setStyleSheet(str(POP_UP_HEADER_STYLESHEET))
+        self.setFixedHeight(int(POP_UP_HEADER_STYLESHEET['height']))
         self.setContentsMargins(0, 0, 0, 0)
         # lll = Color('red')  # QLabel(self, text='Test')
 
@@ -45,8 +50,9 @@ class HeaderLayoutPopUp(HeaderLayout):
 
         text_layout.setContentsMargins(0, 0, 0, 0)
         buttons_layout = HorizontalLayout(self)
-        buttons_layout.setContentsMargins(0, 0, 0, 0)
-        buttons_layout.add_widget(CloseButtonPopUp(self), alignment=Qt.AlignRight)
+        buttons_layout.set_content_margins(0, 0, 0, 0)
+        buttons_layout.add_widget(CloseButtonPopUp(self, onclick=self.parent.end), alignment=Qt.AlignRight)
+        # buttons_layout.add_widget(Color("red"), alignment=Qt.AlignRight)
         # text_layout.add_widget(lll)
         self.add_widget(text_layout)
         self.add_widget(buttons_layout)
@@ -87,7 +93,7 @@ class PopUp(QDialog):
     def add_widget(self, widget: QWidget):
         self._layout.add_widget(widget)
 
-    def close(self):
+    def end(self):
         self.accept()
 
         #

@@ -1,16 +1,18 @@
 CLOSE_BUTTON_STYLESHEET_TEMPLATE = {
-    "height": "15",
-    "width": "15",
+    "height": "10",
+    "width": "10",
     "border": "None",
-    "border-radius": "5",
+    "border-radius": "1",
     "margin-right": "15",
+    "margin-top": "0",
+    "margin-bottom": "0",
 }
 
 CLOSE_BUTTON_STYLESHEET_TEMPLATE_HOVER = {
-    "height": "15",
-    "width": "15",
+    "height": "10",
+    "width": "10",
     "border": "None",
-    "border-radius": "5",
+    "border-radius": "1",
     "margin-right": "15",
-    "background-color": "#28b3bd",
+    "background-color": "#18a3ba",
 }

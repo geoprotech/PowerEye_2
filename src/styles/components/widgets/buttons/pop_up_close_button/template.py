@@ -1,6 +1,6 @@
 CLOSE_BUTTON_STYLESHEET_TEMPLATE = {
-    "height": "10",
-    "width": "10",
+    "height": "20",
+    "width": "20",
     "border": "None",
     "border-radius": "1",
     "margin-right": "15",
@@ -9,8 +9,8 @@ CLOSE_BUTTON_STYLESHEET_TEMPLATE = {
 }
 
 CLOSE_BUTTON_STYLESHEET_TEMPLATE_HOVER = {
-    "height": "10",
-    "width": "10",
+    "height": "20",
+    "width": "20",
     "border": "None",
     "border-radius": "1",
     "margin-right": "15",

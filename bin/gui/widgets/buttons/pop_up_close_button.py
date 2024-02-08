@@ -7,10 +7,6 @@ from src.styles.components.widgets.buttons import POP_CLOSE_BUTTON_STYLESHEET, P
 
 
 class CloseButtonPopUp(BaseButton):
-    """
-    pass
-    """
-
     HOVER_ON = POP_CLOSE_BUTTON_STYLESHEET_HOVER
     HOVER_OFF = POP_CLOSE_BUTTON_STYLESHEET
 

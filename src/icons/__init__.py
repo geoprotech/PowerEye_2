@@ -6,6 +6,7 @@ skyrus_logo = ICONS_PATH / Path('skyrus_logo.png')
 
 menu_button_icon = ICONS_PATH / Path("menu_button_icon.png")
 custom_graph_button_icon = ICONS_PATH / Path("custom_graph_button_icon.png")
+close_button_icon = ICONS_PATH / Path("close_button.png")
 enter_data_button_icon = ICONS_PATH / Path("enter_data_button_icon.png")
 mask_group_button_icon = ICONS_PATH / Path("mask_group_button_icon.png")
 parameters_button_icon = ICONS_PATH / Path("parameters_button_icon.png")

@@ -1,6 +1,7 @@
 import PySide6.QtCore as QtCore
 from PySide6.QtGui import QIcon
 
+import src.icons as icons
 from .base import BaseButton
 from src.icons import ICONS_PATH
 from src.styles.components.widgets.buttons import CLOSE_BUTTON_STYLESHEET, CLOSE_BUTTON_STYLESHEET_HOVER
@@ -14,5 +15,5 @@ class CloseButton(BaseButton):
         super().__init__(parent=parent, onclick=QtCore.QCoreApplication.instance().quit)
 
     def make(self):
-        self.setIcon(QIcon(str(ICONS_PATH.joinpath("close_button.png"))))
+        self.setIcon(QIcon(str(ICONS_PATH.joinpath(icons.close_button_icon))))
         self.setStyleSheet(str(CLOSE_BUTTON_STYLESHEET))

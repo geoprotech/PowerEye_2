@@ -6,7 +6,7 @@ from src.icons import ICONS_PATH
 from src.styles.components.widgets.buttons import LEFT_MENU_BUTTON_STYLESHEET, LEFT_MENU_BUTTON_STYLESHEET_HOVER
 
 
-class LeftMenuBaseIconButton(BaseButton):
+class LeftMenuIconButton(BaseButton):
     HOVER_ON = LEFT_MENU_BUTTON_STYLESHEET_HOVER
     HOVER_OFF = LEFT_MENU_BUTTON_STYLESHEET
 

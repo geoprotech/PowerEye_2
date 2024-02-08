@@ -41,8 +41,7 @@ class BaseButton(QPushButton):
         self.tooltip: str = tooltip
 
     def post_setup(self):
-        if self.onclick:
-            self.add_onclick_event(self.onclick)
+        self.add_onclick_event(self.onclick)
         self.set_tooltip(self.tooltip)
 
     @abstractmethod
@@ -75,12 +74,13 @@ class BaseButton(QPushButton):
             self.setStyleSheet(str(self.FOCUS_OFF))
         return super().focusOutEvent(event)
 
-    def add_onclick_event(self, func: Callable):
+    def add_onclick_event(self, func: Callable or None):
         """
         return object, use it to delete onclick event
         """
-        event = self.clicked.connect(func)
-        return event
+        if func:
+            event = self.clicked.connect(func)
+            return event
 
     def delete_onclick_event(self, event):
         """

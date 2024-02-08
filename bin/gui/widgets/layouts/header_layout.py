@@ -18,9 +18,6 @@ class HeaderLayout(HorizontalLayout):
         buttons_layout = HorizontalLayout(self)
         buttons_layout.setFixedWidth(100)
         buttons_layout.add_widget(buttons.CloseButton(self), alignment=QtCore.Qt.AlignRight)
-        buttons_layout.add_widget(buttons.CloseButton(self), alignment=QtCore.Qt.AlignRight)
-        buttons_layout.add_widget(buttons.CloseButton(self), alignment=QtCore.Qt.AlignRight)
 
         self.add_widget(logo_layout)
         self.add_widget(buttons_layout)
-        # self.add_widget(buttons.CloseButton(self), alignment=QtCore.Qt.AlignRight)

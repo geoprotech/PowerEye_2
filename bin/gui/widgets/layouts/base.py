@@ -22,9 +22,6 @@ class BaseLayout(QFrame):
         super().__init__(parent=parent)
         self._layout = BaseLayout.layout_types.get(layout_type)()  # protected
 
-    def post_setup(self):
-        self.setLayout(self._layout)
-
     @abstractmethod
     def add_widget(self, widget: QWidget, *args, **kwargs):
         pass
@@ -34,6 +31,9 @@ class BaseLayout(QFrame):
         """
         Function to create and config the layout. Must be overriden
         """
+
+    def post_setup(self):
+        self.setLayout(self._layout)
 
     def set_content_margins(self, left: int, top: int, right: int, bottom: int) -> None:
         self._layout.setContentsMargins(left, top, right, bottom)

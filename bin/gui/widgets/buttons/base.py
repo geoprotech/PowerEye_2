@@ -49,7 +49,7 @@ class BaseButton(QPushButton):
         self.set_tooltip(self.tooltip)
         self.storage_signal.connect(self.on_emit)
 
-    # @abstractmethod
+    @abstractmethod
     def make(self):
         """
         Function to create and configure button. Must be overwritten

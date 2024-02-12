@@ -57,6 +57,7 @@ exclude = '''
     | \.venv
     | venv
     | backend_utils
+    | .venv
   )/
 )
 '''

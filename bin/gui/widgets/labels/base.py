@@ -1,17 +1,13 @@
-from abc import abstractmethod
-from typing import Callable
+from PySide6.QtWidgets import QLabel
 
-from PySide6.QtWidgets import QPushButton, QWidget
-
-import bin.exceptions as exceptions
-from bin.gui.decorators import init_protocol
+from src.styles.components.widgets.labels import LABEL_STYLESHEET
 from src.styles.stylesheet import Stylesheet
 
 
-# @init_protocol
-class BaseButton(QPushButton):
+class BaseLabel(QLabel):
     """
-    Base abstract class for all buttons.
+    Base abstract class for all labels.
+    Default stylesheet determined here.
 
     attributes:
         HOVER_ON - style for hover. No hover style changes if it's not implemented.
@@ -24,6 +20,8 @@ class BaseButton(QPushButton):
 
     methods:
         make(): Function to create button. Must be overwritten.
+        set_tooltip(): Function to set tooltip
+        reset_text(): Function to reset text
 
     """
 
@@ -35,25 +33,30 @@ class BaseButton(QPushButton):
 
     TOOLTIP_TEXT: str
 
-    def __init__(self, parent: QWidget, onclick: Callable or None = None, tooltip: str or None = None):
-        super().__init__(parent=parent)
-        self.onclick = onclick
-        self.tooltip: str = tooltip
-        self.post_setup()
-
-    def post_setup(self):
-        self.add_onclick_event(self.onclick)
-        self.set_tooltip(self.tooltip)
+    def __init__(self, parent, *args, **kwargs):
+        super().__init__(parent=parent, *args, **kwargs)
         self.make()
-        self.show()
 
-    @abstractmethod
     def make(self):
         """
-        Function to create and configure button. Must be overwritten
+        determ default stylesheet
         """
+        self.setStyleSheet(str(LABEL_STYLESHEET))
+        self.setFixedWidth(int(LABEL_STYLESHEET['width']))
+        self.setFixedHeight(int(LABEL_STYLESHEET['height']))
+
+        self.show()
+
+    def reset_text(self, text: str) -> None:
+        """
+        reset text in label
+        """
+        self.setText(text)
 
     def set_tooltip(self, text: str):
+        """
+        set tooltip text
+        """
         if text:
             self.setToolTip(text)
 
@@ -76,21 +79,3 @@ class BaseButton(QPushButton):
         if hasattr(self, "FOCUS_OFF"):
             self.setStyleSheet(str(self.FOCUS_OFF))
         return super().focusOutEvent(event)
-
-    def add_onclick_event(self, func: Callable or None):
-        """
-        return object, use it to delete onclick event
-        """
-        if func:
-            event = self.clicked.connect(func)
-            return event
-
-    def delete_onclick_event(self, event):
-        """
-        @param event: returned from add_onclick_event
-        @return:
-        """
-        try:
-            self.clicked.disconnect(event)
-        except RuntimeError:
-            raise exceptions.ButtonEventException("wrong onclick event", level=exceptions.ERROR)

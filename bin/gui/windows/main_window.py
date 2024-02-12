@@ -3,6 +3,7 @@ from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QMainWindow
 
 import bin.gui.widgets.layouts as layouts
+from bin.storage import Storage
 from src.icons import ICONS_PATH
 from src.styles.components.windows import MAIN_WINDOW_STYLESHEET
 
@@ -16,6 +17,7 @@ class MainWindow(QMainWindow):
         super().__init__()
 
     def make(self):
+        Storage().set_data("main_window", self)
         self.setGeometry(*MAIN_WINDOW_STYLESHEET.geometry())
         self.setStyleSheet(str(MAIN_WINDOW_STYLESHEET))
         self.setWindowTitle("PowerEye 2.0")

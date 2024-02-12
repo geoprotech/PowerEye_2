@@ -21,6 +21,7 @@ class BaseLayout(QFrame):
     def __init__(self, parent: QWidget, layout_type: Literal["HBox", "VBox", "Grid", "Stacked"]):
         super().__init__(parent=parent)
         self._layout = BaseLayout.layout_types.get(layout_type)()  # protected
+        self.post_setup()
 
     @abstractmethod
     def add_widget(self, widget: QWidget, *args, **kwargs):
@@ -37,3 +38,6 @@ class BaseLayout(QFrame):
 
     def set_content_margins(self, left: int, top: int, right: int, bottom: int) -> None:
         self._layout.setContentsMargins(left, top, right, bottom)
+
+    def set_spacing(self, spacing: int) -> None:
+        self._layout.setSpacing(spacing)

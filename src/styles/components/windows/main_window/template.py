@@ -10,5 +10,7 @@ MAIN_WINDOW_HEADER_STYLESHEET_TEMPLATE = {
     "width": "100%",
     "font-weight": "600",
     "background-color": "#28BFC9",
-    "height": "68",
+    "height": "45",
+    "border-bottom": "1px solid gray",
+    "padding": "0 0 1 0",
 }

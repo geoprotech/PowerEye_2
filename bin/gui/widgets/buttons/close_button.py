@@ -3,6 +3,7 @@ from PySide6.QtGui import QIcon
 
 import src.icons as icons
 from .base import BaseButton
+from bin.storage import storage
 from src.icons import ICONS_PATH
 from src.styles.components.widgets.buttons import CLOSE_BUTTON_STYLESHEET, CLOSE_BUTTON_STYLESHEET_HOVER
 
@@ -17,3 +18,7 @@ class CloseButton(BaseButton):
     def make(self):
         self.setIcon(QIcon(str(ICONS_PATH.joinpath(icons.close_button_icon))))
         self.setStyleSheet(str(CLOSE_BUTTON_STYLESHEET))
+        storage.connect("close_data", self.storage_signal)
+
+    def on_emit(self):
+        print(storage.pull("close_data"))

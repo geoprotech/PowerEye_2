@@ -6,7 +6,6 @@ from PySide6.QtWidgets import QPushButton, QWidget
 
 import bin.exceptions as exceptions
 from bin.gui.decorators import init_protocol
-from bin.storage import storage
 from src.styles.stylesheet import Stylesheet
 
 

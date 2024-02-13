@@ -1,1 +1,1 @@
-from .storage import storage
+from .storage import Storage

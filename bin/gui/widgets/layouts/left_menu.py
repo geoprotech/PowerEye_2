@@ -31,7 +31,6 @@ class LeftMenu(VerticalLayout):
         self.init_buttons()
 
         self.setStyleSheet(str(LEFT_MENU_STYLESHEET))
-        self.setFixedWidth(int(LEFT_MENU_STYLESHEET['width']))
         self.set_content_margins(0, 0, 0, 0)
         self._layout.setSpacing(0)
 

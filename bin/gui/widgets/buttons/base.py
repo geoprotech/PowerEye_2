@@ -4,8 +4,6 @@ from typing import Callable
 from PySide6.QtWidgets import QPushButton, QWidget
 
 import bin.exceptions as exceptions
-from bin.gui.decorators import init_protocol
-from src.styles.stylesheet import Stylesheet
 
 
 # @init_protocol
@@ -26,14 +24,6 @@ class BaseButton(QPushButton):
         make(): Function to create button. Must be overwritten.
 
     """
-
-    HOVER_ON: Stylesheet
-    HOVER_OFF: Stylesheet
-
-    FOCUS_ON: Stylesheet
-    FOCUS_OFF: Stylesheet
-
-    TOOLTIP_TEXT: str
 
     def __init__(self, parent: QWidget, onclick: Callable or None = None, tooltip: str or None = None):
         super().__init__(parent=parent)
@@ -56,26 +46,6 @@ class BaseButton(QPushButton):
     def set_tooltip(self, text: str):
         if text:
             self.setToolTip(text)
-
-    def enterEvent(self, event):  # noqa
-        if hasattr(self, "HOVER_ON"):
-            self.setStyleSheet(str(self.HOVER_ON))
-        return super().enterEvent(event)
-
-    def leaveEvent(self, event):  # noqa
-        if hasattr(self, "HOVER_OFF"):
-            self.setStyleSheet(str(self.HOVER_OFF))
-        return super().leaveEvent(event)
-
-    def focusInEvent(self, event):  # noqa
-        if hasattr(self, "FOCUS_ON"):
-            self.setStyleSheet(str(self.FOCUS_ON))
-        return super().focusInEvent(event)
-
-    def focusOutEvent(self, event):  # noqa
-        if hasattr(self, "FOCUS_OFF"):
-            self.setStyleSheet(str(self.FOCUS_OFF))
-        return super().focusOutEvent(event)
 
     def add_onclick_event(self, func: Callable or None):
         """

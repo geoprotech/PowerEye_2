@@ -7,4 +7,4 @@ close_button_css: str
 
 with open(CUR_PATH / Path("style.css")) as f:
     data = f.read()
-LABEL_STYLESHEET = data
+CHECKBOX_STYLESHEET = data

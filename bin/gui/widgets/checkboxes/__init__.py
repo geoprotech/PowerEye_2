@@ -1,1 +1,1 @@
-from .base import BaseLineEdit
+from .base import BaseCheckBox

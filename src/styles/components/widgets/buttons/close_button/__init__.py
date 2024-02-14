@@ -1,4 +1,1 @@
-from .object import (
-    CLOSE_BUTTON_STYLESHEET,
-    CLOSE_BUTTON_STYLESHEET_HOVER,
-)
+from .object import close_button_qss

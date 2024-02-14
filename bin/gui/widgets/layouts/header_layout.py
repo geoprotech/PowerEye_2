@@ -3,7 +3,7 @@ import PySide6.QtCore as QtCore
 import bin.gui.widgets.buttons as buttons
 from .base_horizontal_layout import HorizontalLayout
 from bin.storage import Storage
-from src.styles.components.windows import MAIN_WINDOW_HEADER_STYLESHEET
+from src.styles.components.widgets.layouts import HEADER_STYLESHEET
 
 
 class HeaderLayout(HorizontalLayout):
@@ -12,9 +12,10 @@ class HeaderLayout(HorizontalLayout):
     """
 
     def make(self):
-        self.setFixedHeight(int(MAIN_WINDOW_HEADER_STYLESHEET["height"]))
-        self.setStyleSheet(str(MAIN_WINDOW_HEADER_STYLESHEET))
-        self.set_content_margins(0, 0, 0, 0)
+        self.setObjectName("header")
+        self.setStyleSheet(HEADER_STYLESHEET)
+        # self.setFixedHeight(45)
+        self.set_content_margins(0, 0, 0, 1)
         self.set_spacing(0)
 
         logo_layout = HorizontalLayout(self)

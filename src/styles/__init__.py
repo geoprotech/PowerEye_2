@@ -1,1 +1,1 @@
-from .stylesheet import Stylesheet
+from .stylesheet import stylesheet

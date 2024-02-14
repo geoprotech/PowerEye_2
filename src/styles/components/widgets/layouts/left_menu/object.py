@@ -1,5 +1,10 @@
-from .template import *
-from src.styles import Stylesheet
+from pathlib import Path
 
 
-LEFT_MENU_STYLESHEET = Stylesheet(LEFT_MENU_STYLESHEET_TEMPLATE)
+CUR_PATH = Path(__file__).parent
+
+close_button_css: str
+
+with open(CUR_PATH / Path("style.css")) as f:
+    data = f.read()
+LEFT_MENU_STYLESHEET = data

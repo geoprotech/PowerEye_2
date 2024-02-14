@@ -1,6 +1,11 @@
-from .template import *
-from src.styles import Stylesheet
+# from .template import *
+from pathlib import Path
 
 
-CLOSE_BUTTON_STYLESHEET = Stylesheet(CLOSE_BUTTON_STYLESHEET_TEMPLATE)
-CLOSE_BUTTON_STYLESHEET_HOVER = Stylesheet(CLOSE_BUTTON_STYLESHEET_TEMPLATE_HOVER)
+CUR_PATH = Path(__file__).parent
+
+close_button_css: str
+
+with open(CUR_PATH / Path("style.css")) as f:
+    data = f.read()
+close_button_qss = data

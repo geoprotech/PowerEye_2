@@ -1,5 +1,12 @@
-from .template import *
-from src.styles import Stylesheet
+from pathlib import Path
 
 
-LINE_EDIT_STYLESHEET = Stylesheet(LINE_EDIT_STYLESHEET_TEMPLATE)
+CUR_PATH = Path(__file__).parent
+
+close_button_css: str
+
+with open(CUR_PATH / Path("style.css")) as f:
+    data = f.read()
+LINE_EDIT_STYLESHEET = data
+
+# LINE_EDIT_STYLESHEET = Stylesheet(LINE_EDIT_STYLESHEET_TEMPLATE)

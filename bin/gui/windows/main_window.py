@@ -18,8 +18,8 @@ class MainWindow(QMainWindow):
 
     def make(self):
         Storage().set_data("main_window", self)
-        self.setGeometry(*MAIN_WINDOW_STYLESHEET.geometry())
-        self.setStyleSheet(str(MAIN_WINDOW_STYLESHEET))
+        # self.setGeometry(*MAIN_WINDOW_STYLESHEET.geometry())
+        self.setStyleSheet(MAIN_WINDOW_STYLESHEET)
         self.setWindowTitle("PowerEye 2.0")
         self.setWindowIcon(QIcon(str(ICONS_PATH.joinpath("skyrus_logo.png"))))
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint)

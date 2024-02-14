@@ -4,38 +4,30 @@ from typing import Callable
 from PySide6.QtWidgets import QPushButton, QWidget
 
 import bin.exceptions as exceptions
+from bin.gui.decorators import init_protocol
 
 
-# @init_protocol
 class BaseButton(QPushButton):
     """
     Base abstract class for all buttons.
 
-    attributes:
-        HOVER_ON - style for hover. No hover style changes if it's not implemented.
-        HOVER_OFF - style for hover exit. You can use default stylesheet for button here.
-
-        FOCUS_ON - style for focus. No focus style if it's not implemented.
-        FOCUS_OFF - style for unfocused stated. You can use HOVER_ON stylesheet here.
-
-        TOOLTIP_TEXT - text for tooltip. No tooltip if not implemented.
-
     methods:
         make(): Function to create button. Must be overwritten.
+        set_tooltip(text)
+        add_onclick_event(func)
+        delete_onclick_event(event)
 
     """
 
+    @init_protocol
     def __init__(self, parent: QWidget, onclick: Callable or None = None, tooltip: str or None = None):
         super().__init__(parent=parent)
         self.onclick = onclick
         self.tooltip: str = tooltip
-        self.post_setup()
 
     def post_setup(self):
         self.add_onclick_event(self.onclick)
         self.set_tooltip(self.tooltip)
-        self.make()
-        self.show()
 
     @abstractmethod
     def make(self):

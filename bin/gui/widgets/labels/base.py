@@ -1,5 +1,6 @@
 from PySide6.QtWidgets import QLabel
 
+from bin.gui.decorators import init_protocol
 from src.styles.components.widgets.labels import LABEL_STYLESHEET
 
 
@@ -16,9 +17,9 @@ class BaseLabel(QLabel):
 
     """
 
+    @init_protocol
     def __init__(self, parent, *args, **kwargs):
         super().__init__(parent=parent, *args, **kwargs)
-        self.make()
 
     def make(self):
         """
@@ -26,10 +27,6 @@ class BaseLabel(QLabel):
         """
         self.post_setup()
         self.setStyleSheet(str(LABEL_STYLESHEET))
-        # self.setFixedWidth(int(LABEL_STYLESHEET['width']))
-        # self.setFixedHeight(int(LABEL_STYLESHEET['height']))
-
-        self.show()
 
     def post_setup(self):
         """
@@ -49,23 +46,3 @@ class BaseLabel(QLabel):
         """
         if text:
             self.setToolTip(text)
-
-    def enterEvent(self, event):  # noqa
-        if hasattr(self, "HOVER_ON"):
-            self.setStyleSheet(str(self.HOVER_ON))
-        return super().enterEvent(event)
-
-    def leaveEvent(self, event):  # noqa
-        if hasattr(self, "HOVER_OFF"):
-            self.setStyleSheet(str(self.HOVER_OFF))
-        return super().leaveEvent(event)
-
-    def focusInEvent(self, event):  # noqa
-        if hasattr(self, "FOCUS_ON"):
-            self.setStyleSheet(str(self.FOCUS_ON))
-        return super().focusInEvent(event)
-
-    def focusOutEvent(self, event):  # noqa
-        if hasattr(self, "FOCUS_OFF"):
-            self.setStyleSheet(str(self.FOCUS_OFF))
-        return super().focusOutEvent(event)

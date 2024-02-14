@@ -6,7 +6,6 @@ from PySide6.QtWidgets import QFrame, QGridLayout, QHBoxLayout, QStackedLayout, 
 from bin.gui.decorators import init_protocol
 
 
-@init_protocol
 class BaseLayout(QFrame):
     """
     layout_types:
@@ -18,10 +17,10 @@ class BaseLayout(QFrame):
 
     layout_types = {"HBox": QHBoxLayout, "VBox": QVBoxLayout, "Grid": QGridLayout, "Stacked": QStackedLayout}
 
+    @init_protocol
     def __init__(self, parent: QWidget, layout_type: Literal["HBox", "VBox", "Grid", "Stacked"]):
         super().__init__(parent=parent)
         self._layout = BaseLayout.layout_types.get(layout_type)()  # protected
-        self.post_setup()
 
     @abstractmethod
     def add_widget(self, widget: QWidget, *args, **kwargs):

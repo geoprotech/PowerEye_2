@@ -1,7 +1,7 @@
 from abc import abstractmethod
 from typing import Callable
 
-from PySide6.QtWidgets import QCheckBox, QStyle, QWidget
+from PySide6.QtWidgets import QCheckBox, QWidget
 
 from src.styles.components.widgets.checkboxes import CHECKBOX_STYLESHEET
 
@@ -55,10 +55,3 @@ class BaseCheckBox(QCheckBox):
         except RuntimeError:
             pass
             # raise exceptions.CheckboxEventException("wrong on_state_changed event", level=exceptions.ERROR)
-
-    def initStyleOption(self, option):  # noqa
-        super().initStyleOption(option)
-        if self.isChecked():
-            option.state |= QStyle.State_On
-        else:
-            option.state |= QStyle.State_Off

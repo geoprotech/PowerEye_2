@@ -1,5 +1,4 @@
-from .template import *
-from src.styles import Stylesheet
+from src.styles.stylesheet import stylesheet
 
 
-LEFT_MENU_STYLESHEET = Stylesheet(LEFT_MENU_STYLESHEET_TEMPLATE)
+LEFT_MENU_STYLESHEET = stylesheet(__file__)

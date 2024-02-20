@@ -2,6 +2,7 @@ import PySide6.QtCore as QtCore
 
 from ..stub import Color
 from .base_stacked_layout import StackedLayout
+from .playground import PlaygroundLayout
 
 
 TAB_NAMES = ["menu", "enter_data", "parameters", "trajectory", "tnd", "mask_group", "custom_graph", "stats"]
@@ -34,7 +35,7 @@ class MainWorkspaceLayout(StackedLayout):
 
     def make(self):
         self.__create_tabs()
-        self.switch_tab("menu")
+        self.switch_tab("test")
         self.__connect_tabs_to_signals()
 
     def __create_tabs(self):
@@ -44,6 +45,8 @@ class MainWorkspaceLayout(StackedLayout):
         tab_colors = ["red", "orange", "yellow", "green", "blue", "purple", "gray", "pink"]
         for color, name in zip(tab_colors, TAB_NAMES):
             self.add_tab(Color(color), tab_name=name)
+            # self.add_tab(QWidget(), tab_name=name)
+        self.add_tab(PlaygroundLayout(parent=self), tab_name="test")
 
     def __connect_tabs_to_signals(self):
         """

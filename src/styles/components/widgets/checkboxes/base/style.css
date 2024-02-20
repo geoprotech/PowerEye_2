@@ -1,5 +1,6 @@
 QCheckBox{
-    min-width: 5em;
+    min-width: 130px;
+    max-width: 130px;
     border: none;
     border-radius: 2px;
     background-color: #28b3bd;

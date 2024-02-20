@@ -3,10 +3,12 @@ from typing import Callable
 
 from PySide6.QtWidgets import QCheckBox, QWidget
 
-from src.styles.components.widgets.checkboxes import CHECKBOX_STYLESHEET
+import bin.exceptions as exceptions
+from bin.gui.decorators.init_protocol import init_protocol
+from src.styles.components.widgets.checkboxes import DEFAULT_CHECKBOX_STYLESHEET
 
 
-class BaseCheckBox(QCheckBox):
+class BaseCheckbox(QCheckBox):
     """
     Base abstract class for all custom checkboxes.
 
@@ -15,23 +17,23 @@ class BaseCheckBox(QCheckBox):
 
     """
 
-    def __init__(
-        self, parent: QWidget, text: str, on_state_changed: Callable or None = None, tooltip: str or None = None
-    ):
+    @init_protocol
+    def __init__(self, parent: QWidget, text: str, on_change: Callable or None = None, tooltip: str or None = None):
         super().__init__(parent=parent, text=text)
-        self.on_state_changed = on_state_changed
+        self.on_change = on_change
         self.tooltip: str = tooltip
-        self.post_setup()
 
-    def post_setup(self):
-        self.add_on_state_changed_event(self.on_state_changed)
+    def pre_setup(self):
+        self.add_on_state_changed_event(self.on_change)
         self.set_tooltip(self.tooltip)
-        self.make()
-        self.show()
+        self.setStyleSheet(DEFAULT_CHECKBOX_STYLESHEET)
 
     @abstractmethod
     def make(self):
-        self.setStyleSheet(CHECKBOX_STYLESHEET)
+        """
+        Function to create and configure checkboxes. Must be overwritten
+        @return:
+        """
 
     def set_tooltip(self, text: str):
         if text:
@@ -53,5 +55,4 @@ class BaseCheckBox(QCheckBox):
         try:
             self.stateChanged.disconnect(event)
         except RuntimeError:
-            pass
-            # raise exceptions.CheckboxEventException("wrong on_state_changed event", level=exceptions.ERROR)
+            raise exceptions.CheckboxEventException("wrong on_state_changed event", level=exceptions.ERROR)

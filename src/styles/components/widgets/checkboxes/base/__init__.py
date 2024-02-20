@@ -1,3 +1,3 @@
 from .object import (
-    CHECKBOX_STYLESHEET,
+    DEFAULT_CHECKBOX_STYLESHEET,
 )

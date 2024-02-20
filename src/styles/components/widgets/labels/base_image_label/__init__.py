@@ -1,3 +1,3 @@
 from .object import (
-    IMAGE_LABEL_STYLESHEET,
+    DEFAULT_IMAGE_LABEL_STYLESHEET,
 )

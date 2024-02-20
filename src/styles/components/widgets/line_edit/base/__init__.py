@@ -1,3 +1,3 @@
 from .object import (
-    LINE_EDIT_STYLESHEET,
+    DEFAULT_LINE_EDIT_STYLESHEET,
 )

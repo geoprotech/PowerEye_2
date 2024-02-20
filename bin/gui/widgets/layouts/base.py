@@ -32,8 +32,10 @@ class BaseLayout(QFrame):
         Function to create and config the layout. Must be overriden
         """
 
-    def post_setup(self):
+    def pre_setup(self):
         self.setLayout(self._layout)
+        # self.set_content_margins(0,0,0,0)
+        # self.set_spacing(0)
 
     def set_content_margins(self, left: int, top: int, right: int, bottom: int) -> None:
         self._layout.setContentsMargins(left, top, right, bottom)

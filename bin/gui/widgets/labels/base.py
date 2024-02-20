@@ -1,7 +1,9 @@
+from abc import abstractmethod
+
 from PySide6.QtWidgets import QLabel
 
 from bin.gui.decorators import init_protocol
-from src.styles.components.widgets.labels import LABEL_STYLESHEET
+from src.styles.components.widgets.labels import DEFAULT_LABEL_STYLESHEET
 
 
 class BaseLabel(QLabel):
@@ -11,7 +13,7 @@ class BaseLabel(QLabel):
 
 
     methods:
-        make(): Function to create button. Must be overwritten.
+        make(): Function to create label. Must be overwritten.
         set_tooltip(): Function to set tooltip
         reset_text(): Function to reset text
 
@@ -21,28 +23,14 @@ class BaseLabel(QLabel):
     def __init__(self, parent, *args, **kwargs):
         super().__init__(parent=parent, *args, **kwargs)
 
+    @abstractmethod
     def make(self):
         """
         determ default stylesheet
         """
-        self.post_setup()
-        self.setStyleSheet(str(LABEL_STYLESHEET))
 
-    def post_setup(self):
+    def pre_setup(self):
         """
-        abstract method
         @return:
         """
-
-    def reset_text(self, text: str) -> None:
-        """
-        reset text in label
-        """
-        self.setText(text)
-
-    def set_tooltip(self, text: str):
-        """
-        set tooltip text
-        """
-        if text:
-            self.setToolTip(text)
+        self.setStyleSheet(str(DEFAULT_LABEL_STYLESHEET))

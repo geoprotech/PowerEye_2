@@ -1,6 +1,7 @@
 from PySide6.QtWidgets import QLineEdit
 
-from src.styles.components.widgets.line_edit import LINE_EDIT_STYLESHEET
+from bin.gui.decorators.init_protocol import init_protocol
+from src.styles.components.widgets.line_edit import DEFAULT_LINE_EDIT_STYLESHEET
 
 
 class BaseLineEdit(QLineEdit):
@@ -9,19 +10,19 @@ class BaseLineEdit(QLineEdit):
         Default stylesheet determined here.
 
     methods:
-        make(): Function to create button. Must be overwritten.
+        make(): Function to create line edit. Must be overwritten.
         set_tooltip(): Function to set tooltip
 
     """
 
+    @init_protocol
     def __init__(self, parent, *args, **kwargs):
         super().__init__(parent, *args, **kwargs)
 
     def make(self):
-        # self.setAlignment(QtCore.Qt.AlignLeft)
-        self.setStyleSheet(LINE_EDIT_STYLESHEET)
+        self.setStyleSheet(DEFAULT_LINE_EDIT_STYLESHEET)
 
-    def post_setup(self):
+    def pre_setup(self):
         """
         post setup config
         @return:

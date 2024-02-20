@@ -1,1 +1,1 @@
-from .base import BaseCheckBox
+from .base import BaseCheckbox

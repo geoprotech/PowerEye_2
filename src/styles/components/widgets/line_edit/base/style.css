@@ -1,5 +1,5 @@
 QLineEdit{
-    border: none;
+    border: 1px solid black;
     border-radius: 2px;
     background-color: #28bfc9;
     color: white;
@@ -8,8 +8,7 @@ QLineEdit{
     max-width: 134px;
     min-width: 134px;
     max-height: 30px;
-    padding-left: 5px;
-    qproperty-alignment: AlignLeft;
+    qproperty-alignment: AlignRight;
 }
 
 QLineEdit:focus{

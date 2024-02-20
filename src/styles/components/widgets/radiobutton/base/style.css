@@ -1,0 +1,11 @@
+QRadioButton{
+    border: none;
+    border-radius: 2px;
+    background-color: #28bfc9;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    max-width: 130px;
+    min-width: 130px;
+    max-height: 30px;
+}

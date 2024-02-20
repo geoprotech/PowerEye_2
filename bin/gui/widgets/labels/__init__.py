@@ -1,2 +1,2 @@
 from .base import BaseLabel
-from .base_image_label import BaseImageLabel
+from .image_label import ImageLabel

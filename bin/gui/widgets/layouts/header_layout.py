@@ -14,7 +14,6 @@ class HeaderLayout(HorizontalLayout):
     def make(self):
         self.setObjectName("header")
         self.setStyleSheet(HEADER_STYLESHEET)
-        # self.setFixedHeight(45)
         self.set_content_margins(0, 0, 0, 1)
         self.set_spacing(0)
 

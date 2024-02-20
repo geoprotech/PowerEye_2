@@ -1,8 +1,4 @@
-from pathlib import Path
+from src.styles.stylesheet import stylesheet
 
 
-CUR_PATH = Path(__file__).parent
-
-with open(CUR_PATH / Path("style.css")) as f:
-    data = f.read()
-IMAGE_LABEL_STYLESHEET = data
+DEFAULT_IMAGE_LABEL_STYLESHEET = stylesheet(__file__)

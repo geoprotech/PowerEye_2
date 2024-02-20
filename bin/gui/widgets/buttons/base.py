@@ -20,13 +20,13 @@ class BaseButton(QPushButton):
     """
 
     @init_protocol
-    def __init__(self, parent: QWidget, onclick: Callable or None = None, tooltip: str or None = None):
+    def __init__(self, parent: QWidget, on_click: Callable or None = None, tooltip: str or None = None):
         super().__init__(parent=parent)
-        self.onclick = onclick
+        self.on_click = on_click
         self.tooltip: str = tooltip
 
-    def post_setup(self):
-        self.add_onclick_event(self.onclick)
+    def pre_setup(self):
+        self.add_onclick_event(self.on_click)
         self.set_tooltip(self.tooltip)
 
     @abstractmethod

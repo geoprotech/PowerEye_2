@@ -1,15 +1,15 @@
 from PySide6.QtCore import Qt
-from PySide6.QtWidgets import QLabel, QPushButton
+from PySide6.QtWidgets import QDialog, QLabel, QPushButton
 
 from .base_horizontal_layout import HorizontalLayout
-from bin.gui.widgets.buttons.pop_up_close_button import CloseButtonPopUp
-from src.styles.components.widgets.pop_up.object import POP_UP_HEADER_STYLESHEET
+from bin.gui.widgets.buttons.pop_up_close_button import PopUpCloseButton
+from src.styles.components.windows.pop_up import POP_UP_HEADER_STYLESHEET
 
 
-class HeaderLayoutPopUp(HorizontalLayout):
-    def __init__(self, parent):
+class PopUpHeaderLayout(HorizontalLayout):
+    def __init__(self, parent: QDialog):
         self.parent = parent
-        self.title = parent.title_popup
+        self.title = parent.title
         super().__init__(parent=parent)  # super().__init__ -> -> post_setup -> make -> show
 
     def make(self) -> None:
@@ -22,7 +22,7 @@ class HeaderLayoutPopUp(HorizontalLayout):
 
         self._buttons_layout = HorizontalLayout(self)
         self._buttons_layout.set_content_margins(0, 0, 0, 0)
-        self._buttons_layout.add_widget(CloseButtonPopUp(self, onclick=self.parent.end), alignment=Qt.AlignRight)
+        self._buttons_layout.add_widget(PopUpCloseButton(self, onclick=self.parent.close), alignment=Qt.AlignRight)
 
         self.add_widget(text_layout, alignment=Qt.AlignLeft)
         self.add_widget(self._buttons_layout)

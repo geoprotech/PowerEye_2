@@ -6,4 +6,4 @@ from .main_layout import MainLayout
 from .header_layout import HeaderLayout
 from .main_workspace import MainWorkspaceLayout
 from .left_menu import LeftMenu
-from .pop_up_header_layout import HeaderLayoutPopUp
+from .pop_up_header_layout import PopUpHeaderLayout

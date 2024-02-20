@@ -1,4 +1,4 @@
-CLOSE_BUTTON_STYLESHEET_TEMPLATE = {
+POP_UP_CLOSE_BUTTON_STYLESHEET_TEMPLATE = {
     "height": "20",
     "width": "20",
     "border": "None",
@@ -8,7 +8,7 @@ CLOSE_BUTTON_STYLESHEET_TEMPLATE = {
     "margin-bottom": "0",
 }
 
-CLOSE_BUTTON_STYLESHEET_TEMPLATE_HOVER = {
+POP_UP_CLOSE_BUTTON_STYLESHEET_TEMPLATE_HOVER = {
     "height": "20",
     "width": "20",
     "border": "None",

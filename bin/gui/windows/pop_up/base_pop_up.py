@@ -1,49 +1,29 @@
 from abc import abstractmethod
-from typing import Iterable
 
 from PySide6.QtCore import Qt
-from PySide6.QtWidgets import QDialog, QPushButton, QVBoxLayout, QWidget
+from PySide6.QtWidgets import QDialog, QLabel, QVBoxLayout, QWidget
 
-from bin.exceptions.base_powereye_exception import BasePowereyeException
 from bin.gui.decorators import init_protocol
 from bin.gui.widgets.layouts import PopUpHeaderLayout
 
 
-class SizeException(BasePowereyeException):
-    def __init__(self, message):
-        super().__init__(message)
-
-
-@init_protocol
-class PopUp(QDialog):
-    """
-    Base class PopUp Window
-
-        Args:
-            parent(QWidget): parent
-            title(str): Window title in header
-            size(tuple(x: int, y: int,  width: int, height: int)): PopUP size options
-    """
-
-    def __init__(self, parent: QWidget, title: str, size: Iterable[int]):
-        if len(size) != 4:
-            raise SizeException("Invalid number of parameters")
-
+class BasePopUP(QDialog):
+    @init_protocol
+    def __init__(self, parent: QWidget, title: str, *args, **kwargs):
         self.title = title
-        self.size = size
-        super().__init__(parent=parent)
+        super().__init__(parent=parent, *args, **kwargs)
 
-    def post_setup(self) -> None:
-        self.move(*self.size[:2])
-        self.resize(*self.size[2:])
+    def pre_setup(self) -> None:
         self.setWindowFlag(Qt.FramelessWindowHint)
 
-        self._layout_main = QVBoxLayout()
+        self._layout_main = QVBoxLayout()  # noqa
         self._layout_main.setContentsMargins(0, 0, 0, 0)
+        self._layout_main.setSpacing(0)
 
-        self._pop_up_header_layout = PopUpHeaderLayout(parent=self)
+        self._pop_up_header_layout = PopUpHeaderLayout(parent=self)  # noqa
 
-        self._layout_main.addWidget(self._pop_up_header_layout)
+        self.add_widget(self._pop_up_header_layout, stretch=1)
+
         self.setLayout(self._layout_main)
 
     @abstractmethod
@@ -52,40 +32,45 @@ class PopUp(QDialog):
         Function to create and configure layout. Must be overridden
 
             Example:
-                self._add_widget(Color('red'))
-                button = PopUpCloseButton(self.PopUpHeaderLayout, onclick=self.end)
-                self._add_control_buttons(button, alignment=Qt.AlignRight)
+                self.add_widget(Color('red'))
         """
 
-    def _add_widget(self, widget: QWidget) -> None:
-        self._layout_main.addWidget(widget)
+    def add_widget(self, widget: QWidget, stretch: int = 0, alignment: Qt.AlignmentFlag or None = None) -> None:
+        """
+        adds a widget to the layout
+        @param widget: QWidget
+        @param stretch: int
+        @param alignment: Qt.AlignmentFlag or None
+        @return: None
+        """
 
-    def _add_control_buttons(
-        self, button: QPushButton, stretch: int = 0, alignment: Qt.AlignmentFlag or None = None
-    ) -> None:
-        self._pop_up_header_layout.add_button(button, stretch, alignment)
+        # default alignment непонятно как определяется в Qt, поэтому сделал так
+        if alignment:
+            self._layout_main.addWidget(widget, stretch, alignment)
+        else:
+            self._layout_main.addWidget(widget, stretch)
 
-    def _add_widget_header(self, widget: QWidget, stretch: int = 0, alignment: Qt.AlignmentFlag or None = None) -> None:
-        self._pop_up_header_layout.add_widget(widget, stretch, alignment)
+    def _add_title(self) -> None:
+        _title_popup = QLabel(self, text=self.title)
+        _title_popup.setContentsMargins(0, 0, 0, 0)
+        self._pop_up_header_layout.add_widget(_title_popup, alignment=Qt.AlignLeft)
 
-    def show(self):
+    def show(self) -> None:
         self.exec()
 
 
-#
-# class PopUp1(PopUp):
+# class PopUp1(AlertPopUP):
 #     def make(self):
-#         self._add_widget(Color('red'))
-#         self._add_widget(Color('blue'))
-#         button = PopUpCloseButton(self._pop_up_header_layout, onclick=self.close)
-#         self._add_control_buttons(button, alignment=Qt.AlignRight)
+#         super().make()
+#         self.move(500, 500)
+#         self.resize(400, 200)
 #
 #
 # import sys
 #
 # from PySide6.QtWidgets import QApplication, QMainWindow
 #
-# from bin.gui.widgets.buttons.pop_up_close_button import PopUpCloseButton
+# # from bin.gui.widgets.buttons.pop_up_close_button import PopUpCloseButton
 # from bin.gui.widgets.stub import Color
 #
 #
@@ -101,7 +86,7 @@ class PopUp(QDialog):
 #         self.setCentralWidget(button)
 #
 #     def sshow_popup(self):
-#         a = PopUp1(self, 'ali', (0, 300, 500))
+#         a = PopUp1(self, 'Error','Долбень, неверное количество столбцов')
 #
 #
 # def run():

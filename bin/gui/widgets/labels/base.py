@@ -18,8 +18,8 @@ class BaseLabel(QLabel):
     """
 
     @init_protocol
-    def __init__(self, parent, *args, **kwargs):
-        super().__init__(parent=parent, *args, **kwargs)
+    def __init__(self, parent, text: str or None = None, *args, **kwargs):
+        super().__init__(parent=parent, text=text, *args, **kwargs)
 
     @abstractmethod
     def make(self):

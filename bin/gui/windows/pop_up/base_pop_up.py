@@ -16,14 +16,17 @@ class BasePopUP(QDialog):
     def pre_setup(self) -> None:
         self.setWindowFlag(Qt.FramelessWindowHint)
 
+        # self._layout_main = VerticalLayout()  # noqa
         self._layout_main = QVBoxLayout()  # noqa
-        self._layout_main.setContentsMargins(0, 0, 0, 0)
-        self._layout_main.setSpacing(0)
+
+        self.set_content_margins(0, 0, 0, 0)
+        self.set_spacing(0)
 
         self._pop_up_header_layout = PopUpHeaderLayout(parent=self)  # noqa
 
-        self.add_widget(self._pop_up_header_layout, stretch=1)
+        self.add_widget(self._pop_up_header_layout)
 
+        # self.setLayout(QVBoxLayout())
         self.setLayout(self._layout_main)
 
     @abstractmethod
@@ -54,6 +57,20 @@ class BasePopUP(QDialog):
         _title_popup = QLabel(self, text=self.title)
         _title_popup.setContentsMargins(0, 0, 0, 0)
         self._pop_up_header_layout.add_widget(_title_popup, alignment=Qt.AlignLeft)
+
+    def set_content_margins(self, left: int, top: int, right: int, bottom: int) -> None:
+        self._layout_main.setContentsMargins(left, top, right, bottom)
+
+    def set_spacing(self, spacing: int) -> None:
+        self._layout_main.setSpacing(spacing)
+
+    def set_size(self, x: int, y: int, width: int, height: int):
+        self.move(x, y)
+        self.resize(width, height)
+
+    # def keyPressEvent(self, event):
+    #     if event.key() == Qt.Key_Escape:
+    #         event.ignore()
 
     def show(self) -> None:
         self.exec()

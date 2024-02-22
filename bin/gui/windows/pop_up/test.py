@@ -1,20 +1,17 @@
 import sys
 
-from alert_pop_up import AlertPopUP
+# from alert_pop_up import AlertPopUP
 from PySide6.QtWidgets import QApplication, QMainWindow, QPushButton
-
-
-# from yes_no_pop_up import YesNoPopUP
+from yes_no_pop_up import YesNoPopUP
 
 
 # from pop_up import PopUp
 
 
-class PopUp1(AlertPopUP):
+class PopUp1(YesNoPopUP):
     def make(self):
         super().make()
-        self.move(500, 500)
-        # self.resize(100, 200)
+        self.set_size(500, 500, 400, 100)
 
 
 # from bin.gui.widgets.buttons.pop_up_close_button import PopUpCloseButton
@@ -37,8 +34,8 @@ class MainWindow(QMainWindow):
         print('aaaaaaaaaaaaaaaa')
 
     def sshow_popup(self):
-        # a = PopUp1(self, 'Error','Долбень, неверное количество столбцов', on_clik=MainWindow.ttt)
-        PopUp1(self, 'Error', 'Долбень, неверное количество столбцов')
+        PopUp1(self, 'Error', 'Долбень, неверное количество столбцов', on_clik=MainWindow.ttt)
+        # PopUp1(self, 'Error', 'Долбень, неверное количество столбцов')
 
 
 def run():

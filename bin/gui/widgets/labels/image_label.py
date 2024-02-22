@@ -17,10 +17,10 @@ class ImageLabel(BaseLabel):
 
     """
 
-    def __init__(self, parent=None, pixmap: QPixmap or None = None, size: (int, int) or None = None):
+    def __init__(self, parent=None, pixmap: QPixmap or None = None, size: (int, int) or None = None, *args, **kwargs):
         self._pixmap = pixmap
         self.size = size
-        super().__init__(parent)
+        super().__init__(parent, *args, **kwargs)
 
     def pre_setup(self):
         if not self.size:

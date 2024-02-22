@@ -6,11 +6,7 @@ from PySide6.QtCore import Qt
 # from PySide6.QtGui import QIcon, QPixmap
 from PySide6.QtWidgets import QLabel, QPushButton, QWidget
 
-# from bin.gui.widgets.labels import ImageLabel
 from bin.gui.widgets.layouts import HorizontalLayout
-
-
-# from src.icons import ICONS_PATH, close_button_icon, error_icon
 
 
 class YesNoPopUP(BasePopUP):
@@ -22,23 +18,28 @@ class YesNoPopUP(BasePopUP):
     def make(self):
         self._add_title()
 
-        _label = QLabel(text=self.message_text)
-        _label.setContentsMargins(20, 20, 20, 20)
+        text_label = QLabel(text=self.message_text)
+        text_label.setContentsMargins(20, 20, 20, 20)
 
-        _button_layout = HorizontalLayout(self)
+        button_layout = HorizontalLayout(self)
 
-        _accept_button = QPushButton("Accept", self)
-        _reject_button = QPushButton("Reject")
-        _reject_button.clicked.connect(self.close)
-        _accept_button.clicked.connect(self._on_clik)
-        _button_layout.add_widget(_reject_button)
-        _button_layout.add_widget(_accept_button)
-        _button_layout.setContentsMargins(20, 20, 0, 0)
+        accept_button = QPushButton(
+            self,
+            text="Accept",
+        )
+        reject_button = QPushButton(self, text="Reject")
+        reject_button.clicked.connect(self.close)
+        accept_button.clicked.connect(self._on_clik)
+        button_layout.add_widget(reject_button, alignment=Qt.AlignCenter)
+        button_layout.add_widget(accept_button, alignment=Qt.AlignCenter)
+        button_layout.setContentsMargins(0, 10, 0, 0)
 
-        self.add_widget(_label, alignment=Qt.AlignCenter)
-        self.add_widget(_button_layout, alignment=Qt.AlignCenter)
+        self.add_widget(text_label, alignment=Qt.AlignCenter)
+        self.add_widget(
+            button_layout,
+        )
 
-        self._layout_main.setContentsMargins(0, 0, 0, 20)
+        self.set_content_margins(0, 0, 0, 10)
 
     def _on_clik(self):
         self.on_clik()

@@ -1,13 +1,14 @@
 from base_pop_up import BasePopUP
 from PySide6.QtCore import Qt
-from PySide6.QtGui import QPixmap
-
-# from PySide6.QtGui import QIcon
+from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QLabel, QPushButton, QWidget
 
-from bin.gui.widgets.labels import ImageLabel
+# from bin.gui.widgets.labels import ImageLabel
 from bin.gui.widgets.layouts import HorizontalLayout
 from src.icons import warning_icon
+
+
+# from PySide6.QtGui import QPixmap
 
 
 # from src.icons import ICONS_PATH, close_button_icon,
@@ -23,28 +24,28 @@ class AlertPopUP(BasePopUP):
     def make(self):
         self._add_title()
 
-        _error_layout = HorizontalLayout(self)
+        error_layout = HorizontalLayout(self)
 
-        _label = QLabel(text=self.alert_text)
+        label = QLabel(text=self.alert_text)
 
-        # _icon = QIcon(str(error_icon))
-        # _icon = _icon.pixmap(200,200)
-        # _warning_label = QLabel()
-        # _warning_label.setPixmap(_icon)
-        _warning_label = ImageLabel(
-            self,
-            pixmap=QPixmap(warning_icon),
-            size=(40, 40),
-        )
-        # _warning_label.setPixmap(QPixmap(error_icon))
+        icon = QIcon(str(warning_icon))
+        icon = icon.pixmap(50, 50)
+        warning_label = QLabel()
+        warning_label.setPixmap(icon)
 
-        _error_layout.add_widget(_warning_label, alignment=Qt.AlignLeft)
-        _error_layout.add_widget(_label, alignment=Qt.AlignCenter)
+        # warning_label = ImageLabel(
+        #     self,
+        #     pixmap=QPixmap(warning_icon),
+        #     size=(40, 40)
+        # )
 
-        _button = QPushButton("Ок", self)
-        _button.clicked.connect(self.close)
+        error_layout.add_widget(warning_label, alignment=Qt.AlignLeft)
+        error_layout.add_widget(label, alignment=Qt.AlignCenter)
+        error_layout.set_content_margins(0, 10, 10, 10)
+        button = QPushButton("Ок", self)
+        button.clicked.connect(self.close)
 
-        self.add_widget(_error_layout, alignment=Qt.AlignCenter)
-        self.add_widget(_button, alignment=Qt.AlignCenter)
-        self._layout_main.setContentsMargins(0, 0, 0, 20)
-        self._layout_main.setSpacing(0)
+        self.add_widget(error_layout, alignment=Qt.AlignCenter)
+        self.add_widget(button, alignment=Qt.AlignCenter)
+        self.set_content_margins(0, 0, 0, 10)
+        self.set_spacing(0)

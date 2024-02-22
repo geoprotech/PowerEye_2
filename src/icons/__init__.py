@@ -17,3 +17,4 @@ maximize_button_icon = ICONS_PATH / Path("maximize_button_icon.png")
 minimize_button_icon = ICONS_PATH / Path("minimize_button_icon.png")
 
 error_icon = ICONS_PATH / Path("error_icon.png")
+warning_icon = ICONS_PATH / Path("warning_icon.png")

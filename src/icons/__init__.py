@@ -15,3 +15,5 @@ stats_button_icon = ICONS_PATH / Path("stats_button_icon.png")
 trajectory_button_icon = ICONS_PATH / Path("trajectory_button_icon.png")
 maximize_button_icon = ICONS_PATH / Path("maximize_button_icon.png")
 minimize_button_icon = ICONS_PATH / Path("minimize_button_icon.png")
+
+error_icon = ICONS_PATH / Path("error_icon.png")

@@ -1,5 +1,4 @@
-from .template import *
-from src.styles import Stylesheet
+from src.styles import stylesheet
 
 
-POP_UP_HEADER_STYLESHEET = Stylesheet(POP_UP_HEADER_STYLESHEET_TEMPLATE)
+POP_UP_HEADER_STYLESHEET = stylesheet(__file__)

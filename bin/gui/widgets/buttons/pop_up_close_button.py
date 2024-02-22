@@ -1,24 +1,19 @@
 from PySide6.QtCore import QSize
 from PySide6.QtGui import QIcon
 
+import src.icons as icons
 from .base import BaseButton
-from src.icons import ICONS_PATH
-from src.styles.components.widgets.buttons import POP_UP_CLOSE_BUTTON_STYLESHEET, POP_UP_CLOSE_BUTTON_STYLESHEET_HOVER
+from src.styles.components.widgets.buttons import WINDOW_CONTROL_BUTTON_STYLESHEET
 
 
 class PopUpCloseButton(BaseButton):
-    HOVER_ON = POP_UP_CLOSE_BUTTON_STYLESHEET_HOVER
-    HOVER_OFF = POP_UP_CLOSE_BUTTON_STYLESHEET
-
-    def __init__(self, parent, onclick):
-        super().__init__(parent=parent, onclick=onclick)
+    def __init__(self, parent, window):
         self.parent = parent
+        super().__init__(parent=self.parent, on_click=window.close)
 
     def make(self) -> None:
-        self.setIcon(QIcon(str(ICONS_PATH.joinpath("close_button.png"))))
-        size = self.size()
-        icon_width = int(size.width())
-        icon_height = int(size.height())
-        self.setIconSize(QSize(icon_width, icon_height))
-        self.setStyleSheet(str(POP_UP_CLOSE_BUTTON_STYLESHEET))
-        self.setFixedHeight(int(POP_UP_CLOSE_BUTTON_STYLESHEET['height']))
+        self.setIcon(QIcon(str(icons.close_button_icon)))
+        width, height = self.size().width(), self.size().height()
+        width, height = (int(dimension * 0.3) for dimension in (width, height))
+        self.setIconSize(QSize(width, height))
+        self.setStyleSheet(WINDOW_CONTROL_BUTTON_STYLESHEET)

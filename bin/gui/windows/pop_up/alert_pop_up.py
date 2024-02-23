@@ -1,14 +1,11 @@
 from base_pop_up import BasePopUP
 from PySide6.QtCore import Qt
-from PySide6.QtGui import QIcon
-from PySide6.QtWidgets import QLabel, QPushButton, QWidget
+from PySide6.QtGui import QPixmap
+from PySide6.QtWidgets import QPushButton, QWidget
 
-# from bin.gui.widgets.labels import ImageLabel
 from bin.gui.widgets.layouts import HorizontalLayout
+from bin.gui.windows.pop_up import ImageLabelPopUp, PopUpLabel
 from src.icons import warning_icon
-
-
-# from PySide6.QtGui import QPixmap
 
 
 # from src.icons import ICONS_PATH, close_button_icon,
@@ -26,22 +23,25 @@ class AlertPopUP(BasePopUP):
 
         error_layout = HorizontalLayout(self)
 
-        label = QLabel(text=self.alert_text)
+        label = PopUpLabel(parent=self, text=self.alert_text)
 
-        icon = QIcon(str(warning_icon))
-        icon = icon.pixmap(50, 50)
-        warning_label = QLabel()
-        warning_label.setPixmap(icon)
+        # icon = QIcon(str(warning_icon))
+        # icon = icon.pixmap(50, 50)
+        # warning_label = QLabel()
+        # warning_label.setPixmap(icon)
 
-        # warning_label = ImageLabel(
-        #     self,
-        #     pixmap=QPixmap(warning_icon),
-        #     size=(40, 40)
-        # )
+        warning_label = ImageLabelPopUp(self, pixmap=QPixmap(warning_icon), size=(40, 40))
+        # widget_test = HorizontalLayout(parent=self)
+        # widget_test.add_widget(Color('red'))
+        # widget_test.setFixedWidth(40)
+        # widget_test.setFixedHeight(40)
 
         error_layout.add_widget(warning_label, alignment=Qt.AlignLeft)
+        # error_layout.add_widget(widget_test, alignment=Qt.AlignLeft)
         error_layout.add_widget(label, alignment=Qt.AlignCenter)
-        error_layout.set_content_margins(0, 10, 10, 10)
+        # error_layout.add_widget(Color('red'), alignment=Qt.AlignCenter)
+        error_layout.set_content_margins(0, 0, 0, 0)
+        error_layout.set_spacing(0)
         button = QPushButton("Ок", self)
         button.clicked.connect(self.close)
 

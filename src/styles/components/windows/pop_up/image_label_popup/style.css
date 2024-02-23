@@ -1,0 +1,21 @@
+QLabel{
+    border: none;
+    background-color: transparent;
+    margin: 10px;
+    max-width: 40px;
+    min-width: 40px;
+    max-height: 40px;
+    min-height: 40px;
+
+}
+
+QLabel::pop{
+    border: none;
+    background-color: transparent;
+    margin: 10px;
+    max-width: 40px;
+    min-width: 40px;
+    max-height: 40px;
+    min-height: 40px;
+
+}

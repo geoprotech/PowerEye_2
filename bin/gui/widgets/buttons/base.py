@@ -20,8 +20,8 @@ class BaseButton(QPushButton):
     """
 
     @init_protocol
-    def __init__(self, parent: QWidget, on_click: Callable or None = None, tooltip: str or None = None):
-        super().__init__(parent=parent)
+    def __init__(self, parent: QWidget, on_click: Callable or None = None, tooltip: str or None = None, **kwargs):
+        super().__init__(parent=parent, **kwargs)
         self.on_click = on_click
         self.tooltip: str = tooltip
 

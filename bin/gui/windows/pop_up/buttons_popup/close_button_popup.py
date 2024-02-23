@@ -2,11 +2,11 @@ from PySide6.QtCore import QSize
 from PySide6.QtGui import QIcon
 
 import src.icons as icons
-from .base import BaseButton
-from src.styles.components.widgets.buttons import WINDOW_CONTROL_BUTTON_STYLESHEET
+from bin.gui.widgets.buttons.base import BaseButton
+from src.styles.components.windows.pop_up import CONTROL_BUTTON_POP_UP_STYLESHEET
 
 
-class PopUpCloseButton(BaseButton):
+class CloseButtonPopUp(BaseButton):
     def __init__(self, parent, window):
         self.parent = parent
         super().__init__(parent=self.parent, on_click=window.close)
@@ -16,4 +16,4 @@ class PopUpCloseButton(BaseButton):
         width, height = self.size().width(), self.size().height()
         width, height = (int(dimension * 0.3) for dimension in (width, height))
         self.setIconSize(QSize(width, height))
-        self.setStyleSheet(WINDOW_CONTROL_BUTTON_STYLESHEET)
+        self.setStyleSheet(CONTROL_BUTTON_POP_UP_STYLESHEET)

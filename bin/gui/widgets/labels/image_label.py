@@ -1,6 +1,7 @@
 from PySide6.QtGui import QPixmap
 
 from .base import BaseLabel
+from bin.gui.decorators import init_protocol
 from src.styles.components.widgets.labels import DEFAULT_IMAGE_LABEL_STYLESHEET
 
 
@@ -17,6 +18,7 @@ class ImageLabel(BaseLabel):
 
     """
 
+    @init_protocol
     def __init__(self, parent=None, pixmap: QPixmap or None = None, size: (int, int) or None = None, *args, **kwargs):
         self._pixmap = pixmap
         self.size = size

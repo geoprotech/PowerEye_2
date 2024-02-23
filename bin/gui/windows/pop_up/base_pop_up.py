@@ -23,7 +23,7 @@ class BasePopUP(QDialog):
         self.set_spacing(0)
 
         self._pop_up_header_layout = PopUpHeaderLayout(parent=self)  # noqa
-
+        # body_layout
         self.add_widget(self._pop_up_header_layout)
 
         # self.setLayout(QVBoxLayout())
@@ -54,9 +54,9 @@ class BasePopUP(QDialog):
             self._layout_main.addWidget(widget, stretch)
 
     def _add_title(self) -> None:
-        _title_popup = QLabel(self, text=self.title)
-        _title_popup.setContentsMargins(0, 0, 0, 0)
-        self._pop_up_header_layout.add_widget(_title_popup, alignment=Qt.AlignLeft)
+        title_popup = QLabel(self, text=self.title)
+        title_popup.setContentsMargins(0, 0, 0, 0)
+        self._pop_up_header_layout.add_widget(title_popup, alignment=Qt.AlignLeft)
 
     def set_content_margins(self, left: int, top: int, right: int, bottom: int) -> None:
         self._layout_main.setContentsMargins(left, top, right, bottom)

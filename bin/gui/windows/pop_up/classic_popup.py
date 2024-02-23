@@ -1,13 +1,17 @@
 from abc import abstractmethod
 
-from base_pop_up import BasePopUP
 from PySide6.QtCore import Qt
 
-from bin.gui.widgets.buttons import MaximizeButton, MinimizeButton, PopUpCloseButton
+from .base_popup import BasePopUp
+from bin.gui.widgets.buttons import MaximizeButton, MinimizeButton
 from bin.gui.widgets.layouts import HorizontalLayout
+from bin.gui.windows.pop_up.buttons_popup import CloseButtonPopUp
 
 
-class PopUp(BasePopUP):
+# from bin.gui.widgets.stub import Color
+
+
+class PopUp(BasePopUp):
     """
     Base class PopUp Window
 
@@ -18,15 +22,14 @@ class PopUp(BasePopUP):
 
     def pre_setup(self) -> None:
         super().pre_setup()
-        self._add_title()
         header_control_panel = HorizontalLayout(self)
         header_control_panel.set_content_margins(0, 0, 0, 0)
         header_control_panel.setFixedWidth(120)
         header_control_panel.add_widget(MinimizeButton(header_control_panel, self), alignment=Qt.AlignRight)
         header_control_panel.add_widget(MaximizeButton(header_control_panel, self), alignment=Qt.AlignRight)
-        header_control_panel.add_widget(PopUpCloseButton(header_control_panel, self), alignment=Qt.AlignRight)
+        header_control_panel.add_widget(CloseButtonPopUp(header_control_panel, self), alignment=Qt.AlignRight)
 
-        self._pop_up_header_layout.add_widget(header_control_panel, alignment=Qt.AlignRight)
+        self._header_layout_popup.add_widget(header_control_panel, alignment=Qt.AlignRight)
 
     @abstractmethod
     def make(self) -> None:

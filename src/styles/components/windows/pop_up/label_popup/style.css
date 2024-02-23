@@ -1,0 +1,17 @@
+QLabel{
+    border: none;
+    background-color: transparent;
+    font-size: 14px;
+    padding-left: 5px;
+    color: black;
+    font-weight: 500;
+    margin: 5px;
+}
+QLabel::header{
+    border: none;
+    background-color: transparent;
+    font-size: 14px;
+    padding-left: 5px;
+    color: black;
+    font-weight: 500;
+}

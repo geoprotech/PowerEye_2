@@ -1,4 +1,4 @@
 from src.styles.stylesheet import stylesheet
 
 
-DEFAULT_IMAGE_DEFAULT_LABEL_POP_UP_STYLESHEET = stylesheet(__file__)
+DEFAULT_IMAGE_LABEL_POP_UP_STYLESHEET = stylesheet(__file__)

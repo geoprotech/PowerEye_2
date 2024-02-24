@@ -5,3 +5,7 @@ QWidget{
     background-color: #28bfc9;
     height: 45px;
 }
+QWidget #popup_header{
+    border-bottom: 1px solid gray;
+    max-height: 45px;
+}

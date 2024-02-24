@@ -46,6 +46,6 @@ class YesNoPopUp(BasePopUp):
     def _on_click(self, func: Callable) -> Callable:
         def wrapper():
             self.close()
-            func()
+            return func()
 
         return wrapper

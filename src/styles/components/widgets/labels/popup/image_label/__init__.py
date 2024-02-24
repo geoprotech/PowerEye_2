@@ -1,0 +1,1 @@
+from .object import DEFAULT_POP_UP_IMAGE_LABEL_STYLESHEET

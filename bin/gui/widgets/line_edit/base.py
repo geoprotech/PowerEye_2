@@ -1,3 +1,5 @@
+from abc import abstractmethod
+
 from PySide6.QtWidgets import QLineEdit
 
 from bin.gui.decorators.init_protocol import init_protocol
@@ -19,14 +21,18 @@ class BaseLineEdit(QLineEdit):
     def __init__(self, parent, *args, **kwargs):
         super().__init__(parent, *args, **kwargs)
 
+    @abstractmethod
     def make(self):
-        self.setStyleSheet(DEFAULT_LINE_EDIT_STYLESHEET)
+        """
+        to be overridden
+        """
 
     def pre_setup(self):
         """
         post setup config
         @return:
         """
+        self.setStyleSheet(DEFAULT_LINE_EDIT_STYLESHEET)
 
     def set_tooltip(self, text: str):
         """

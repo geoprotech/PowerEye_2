@@ -6,6 +6,6 @@ QWidget{
     height: 45px;
 }
 QWidget #header{
-    border-bottom: 1px solid gray;
+    border-bottom: 1px solid #92D4D8;
     max-height: 45px;
 }

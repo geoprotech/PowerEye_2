@@ -1,8 +1,11 @@
+from PySide6.QtGui import QPixmap
+
 from bin.gui.widgets.checkboxes import BaseCheckbox
-from bin.gui.widgets.labels import BaseLabel
+from bin.gui.widgets.labels import BaseLabel, ImageLabel
 from bin.gui.widgets.layouts import HorizontalLayout, VerticalLayout
 from bin.gui.widgets.line_edit import BaseLineEdit
 from bin.gui.widgets.radiobuttons import BaseRadioButton
+from src.icons import skyrus_logo
 
 
 class PlaygroundLayout(VerticalLayout):
@@ -30,9 +33,11 @@ class PlaygroundLayout(VerticalLayout):
         input2 = BaseLineEdit(self)
         input2.textChanged.connect(lambda text: print(input2.text()))
         radio2 = BaseRadioButton(self, text="option1")
+        image = ImageLabel(parent=self, pixmap=QPixmap(skyrus_logo))
         lay2.add_widget(label2)
         lay2.add_widget(input2)
         lay2.add_widget(radio2)
+        lay2.add_widget(image)
         radio2.clicked.connect(lambda checked: print(checked))
 
         # label2_1 = BaseImageLabel(

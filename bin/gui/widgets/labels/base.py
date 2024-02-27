@@ -15,8 +15,6 @@ class BaseLabel(QLabel):
     methods:
         make(): Function to create label. Must be overwritten.
         set_tooltip(): Function to set tooltip
-        reset_text(): Function to reset text
-
     """
 
     @init_protocol

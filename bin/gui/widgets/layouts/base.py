@@ -1,6 +1,7 @@
 from abc import abstractmethod
 from typing import Literal
 
+from PySide6 import QtCore
 from PySide6.QtWidgets import QFrame, QGridLayout, QHBoxLayout, QStackedLayout, QVBoxLayout, QWidget
 
 from bin.gui.decorators import init_protocol
@@ -15,6 +16,7 @@ class BaseLayout(QFrame):
         "Stacked" - stacked layout
     """
 
+    storage_signal = QtCore.Signal()
     layout_types = {"HBox": QHBoxLayout, "VBox": QVBoxLayout, "Grid": QGridLayout, "Stacked": QStackedLayout}
 
     @init_protocol
@@ -32,8 +34,15 @@ class BaseLayout(QFrame):
         Function to create and config the layout. Must be overriden
         """
 
+    @abstractmethod
+    def on_emit(self):
+        """
+        Functon that will be called after storage emit event.
+        """
+
     def pre_setup(self):
         self.setLayout(self._layout)
+        self.storage_signal.connect(self.on_emit)
         # self.set_content_margins(0,0,0,0)
         # self.set_spacing(0)
 

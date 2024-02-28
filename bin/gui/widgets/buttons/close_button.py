@@ -4,6 +4,7 @@ from PySide6.QtGui import QIcon
 
 import src.icons as icons
 from .base import BaseButton
+from bin.storage import storage
 from src.icons import ICONS_PATH
 from src.styles.components.widgets.buttons import WINDOW_CONTROL_BUTTON_STYLESHEET
 
@@ -18,3 +19,6 @@ class CloseButton(BaseButton):
         width, height = (int(dimension * 0.3) for dimension in (width, height))
         self.setIconSize(QSize(width, height))
         self.setStyleSheet(WINDOW_CONTROL_BUTTON_STYLESHEET)
+
+    def on_emit(self):
+        print(storage.pull("close_data"))

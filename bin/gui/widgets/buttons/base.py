@@ -1,10 +1,12 @@
 from abc import abstractmethod
 from typing import Callable
 
+from PySide6 import QtCore
 from PySide6.QtWidgets import QPushButton, QWidget
 
 import bin.exceptions as exceptions
 from bin.gui import init_protocol
+from bin.storage import storage
 
 
 class BaseButton(QPushButton):
@@ -19,6 +21,8 @@ class BaseButton(QPushButton):
 
     """
 
+    storage_signal = QtCore.Signal()
+
     @init_protocol
     def __init__(self, parent: QWidget, on_click: Callable or None = None, tooltip: str or None = None):
         super().__init__(parent=parent)
@@ -28,11 +32,18 @@ class BaseButton(QPushButton):
     def pre_setup(self):
         self.add_onclick_event(self.on_click)
         self.set_tooltip(self.tooltip)
+        self.storage_signal.connect(self.on_emit)
 
     @abstractmethod
     def make(self):
         """
         Function to create and configure button. Must be overwritten
+        """
+
+    @abstractmethod
+    def on_emit(self):
+        """
+        Functon that will be called after storage emit event.
         """
 
     def set_tooltip(self, text: str):

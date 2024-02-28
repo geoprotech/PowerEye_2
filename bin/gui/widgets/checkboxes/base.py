@@ -4,7 +4,7 @@ from typing import Callable
 from PySide6.QtWidgets import QCheckBox, QWidget
 
 import bin.exceptions as exceptions
-from bin.gui.decorators.init_protocol import init_protocol
+from bin.gui import init_protocol
 from src.styles.components.widgets.checkboxes import DEFAULT_CHECKBOX_STYLESHEET
 
 

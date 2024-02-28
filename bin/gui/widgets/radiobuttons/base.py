@@ -1,6 +1,6 @@
 from PySide6.QtWidgets import QRadioButton, QWidget
 
-from bin.gui.decorators.init_protocol import init_protocol
+from bin.gui import init_protocol
 from src.styles.components.widgets.radiobutton import DEFAULT_RADIOBUTTON_STYLESHEET
 
 

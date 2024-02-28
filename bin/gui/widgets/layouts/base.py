@@ -3,7 +3,7 @@ from typing import Literal
 
 from PySide6.QtWidgets import QFrame, QGridLayout, QHBoxLayout, QStackedLayout, QVBoxLayout, QWidget
 
-from bin.gui.decorators import init_protocol
+from bin.gui import init_protocol
 
 
 class BaseLayout(QFrame):

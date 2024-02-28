@@ -1,1 +1,1 @@
-from .init_protocol import *
+from .init_protocol import init_protocol

@@ -2,7 +2,7 @@ from abc import abstractmethod
 
 from PySide6.QtWidgets import QLineEdit
 
-from bin.gui.decorators.init_protocol import init_protocol
+from bin.gui import init_protocol
 from src.styles.components.widgets.line_edit import DEFAULT_LINE_EDIT_STYLESHEET
 
 

@@ -6,3 +6,5 @@ from .main_layout import MainLayout
 from .header_layout import HeaderLayout
 from .main_workspace import MainWorkspaceLayout
 from .left_menu import LeftMenu
+from .header_buttons_layout import HeaderButtonsLayout
+from .header_logo_layout import HeaderLogoLayout

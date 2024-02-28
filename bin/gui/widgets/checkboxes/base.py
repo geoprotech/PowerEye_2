@@ -1,6 +1,7 @@
 from abc import abstractmethod
 from typing import Callable
 
+from PySide6 import QtCore
 from PySide6.QtWidgets import QCheckBox, QWidget
 
 import bin.exceptions as exceptions
@@ -17,6 +18,8 @@ class BaseCheckbox(QCheckBox):
 
     """
 
+    storage_signal = QtCore.Signal()
+
     @init_protocol
     def __init__(self, parent: QWidget, text: str, on_change: Callable or None = None, tooltip: str or None = None):
         super().__init__(parent=parent, text=text)
@@ -27,12 +30,19 @@ class BaseCheckbox(QCheckBox):
         self.add_on_state_changed_event(self.on_change)
         self.set_tooltip(self.tooltip)
         self.setStyleSheet(DEFAULT_CHECKBOX_STYLESHEET)
+        self.storage_signal.connect(self.on_emit)
 
     @abstractmethod
     def make(self):
         """
         Function to create and configure checkboxes. Must be overwritten
         @return:
+        """
+
+    @abstractmethod
+    def on_emit(self):
+        """
+        Functon that will be called after storage emit event.
         """
 
     def set_tooltip(self, text: str):

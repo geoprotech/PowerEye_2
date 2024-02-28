@@ -25,6 +25,12 @@ class HorizontalLayout(BaseLayout):
         Function to create and configure layout. Must be overridden
         """
 
+    def on_emit(self):
+        """
+        not necessary here
+        @return:
+        """
+
     def add_widget(self, widget: QWidget, stretch: int = 0, alignment: Qt.AlignmentFlag or None = None) -> None:
         """
         adds a widget to the layout

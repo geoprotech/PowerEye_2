@@ -1,3 +1,6 @@
+from abc import abstractmethod
+
+from PySide6 import QtCore
 from PySide6.QtWidgets import QRadioButton, QWidget
 
 from bin.gui.decorators import init_protocol
@@ -15,17 +18,27 @@ class BaseRadioButton(QRadioButton):
 
     """
 
+    storage_signal = QtCore.Signal()
+
     @init_protocol
     def __init__(self, parent: QWidget or None, text: str):
         super().__init__(parent=parent, text=text)
 
+    @abstractmethod
     def make(self):
         """
         will be overriden
         """
 
+    @abstractmethod
+    def on_emit(self):
+        """
+        Functon that will be called after storage emit event.
+        """
+
     def pre_setup(self):
         self.setStyleSheet(DEFAULT_RADIOBUTTON_STYLESHEET)
+        self.storage_signal.connect(self.on_emit)
 
     def set_tooltip(self, text: str):
         """

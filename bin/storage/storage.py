@@ -10,11 +10,9 @@ class Storage(object):
 
     def __new__(cls, *args, **kwargs):
         if not isinstance(cls._instance, cls):
+            cls._data: dict[str : dict[Literal["value"] : Any, Literal["signals"] : list[QtCore.Signal]]] = {}
             cls._instance = object.__new__(cls)
         return cls._instance
-
-    def __init__(self):
-        self._data: dict[str : dict[Literal["value"] : Any, Literal["signals"] : QtCore.Signal]] = {}
 
     def emit(self, key: str):
         if key not in self._data:
@@ -44,13 +42,13 @@ class Storage(object):
 
         return self._data[key]["signals"].remove(signal)
 
-    def push(self, key: str, data: Any) -> None:
+    def set(self, key: str, data: Any) -> None:
         if key in self._data:
             self._data[key]["value"] = data
         else:
             self._data[key] = {"value": data, "signals": []}
 
-    def pull(self, key: str) -> Any:
+    def get(self, key: str) -> Any:
         if key not in self._data:
             raise StorageException(f"No key found: '{key}'")
 
@@ -58,12 +56,3 @@ class Storage(object):
             raise StorageException(f"No comparable data for key: {key}")
 
         return self._data[key]["value"]
-
-
-storage = Storage()
-
-
-if __name__ == "__main__":
-    storage.push("test_field", "test_value")
-    a = storage.pull("test_field")
-    print(a)

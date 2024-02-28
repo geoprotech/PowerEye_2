@@ -3,7 +3,7 @@ from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QMainWindow
 
 import bin.gui.widgets.layouts as layouts
-from bin.storage import storage
+from bin.storage import Storage
 from src.icons import ICONS_PATH
 from src.styles.components.windows import MAIN_WINDOW_STYLESHEET
 
@@ -25,9 +25,9 @@ class MainWindow(QMainWindow):
         self.setWindowTitle("PowerEye 2.0")
         self.setWindowIcon(QIcon(str(ICONS_PATH.joinpath("skyrus_logo.png"))))
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
+        Storage().set("main_window", self)
 
         self._setup_header()
-        storage.push("main_window", self)
 
         self.show()
 
@@ -43,4 +43,7 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(main_layout)
 
     def on_emit(self):
-        pass
+        """
+
+        @return:
+        """

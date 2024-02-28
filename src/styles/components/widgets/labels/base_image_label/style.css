@@ -1,0 +1,8 @@
+QWidget{
+    border: none;
+    background-color: transparent;
+    color: white;
+    max-width: 20px;
+    min-width: 20px;
+    font-weight: 600;
+}

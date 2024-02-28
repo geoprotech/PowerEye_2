@@ -7,6 +7,7 @@ from bin.storage import Storage
 
 
 def main():
+    Storage()
     app = QApplication(sys.argv)
     Storage()
     window = MainWindow()

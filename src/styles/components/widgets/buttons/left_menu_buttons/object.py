@@ -1,6 +1,4 @@
-from .template import *
-from src.styles import Stylesheet
+from src.styles.stylesheet import stylesheet
 
 
-LEFT_MENU_BUTTON_STYLESHEET = Stylesheet(LEFT_MENU_BUTTON_STYLESHEET_TEMPLATE)
-LEFT_MENU_BUTTON_STYLESHEET_HOVER = Stylesheet(LEFT_MENU_BUTTON_STYLESHEET_TEMPLATE_HOVER)
+LEFT_MENU_BUTTON_STYLESHEET = stylesheet(__file__)

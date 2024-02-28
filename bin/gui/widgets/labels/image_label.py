@@ -46,3 +46,9 @@ class ImageLabel(BaseLabel):
             self._size = size
         self._pixmap = self._pixmap.scaled(*self._size)
         self.setPixmap(self._pixmap)
+
+    def on_emit(self):
+        """
+        not necessary here
+        @return:
+        """

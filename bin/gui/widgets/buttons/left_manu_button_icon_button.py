@@ -23,3 +23,9 @@ class LeftMenuIconButton(BaseButton):
         icon_width = int(size.width())
         icon_height = int(size.height())
         self.setIconSize(QSize(icon_width, icon_height))
+
+    def on_emit(self):
+        """
+        not necessary here
+        @return:
+        """

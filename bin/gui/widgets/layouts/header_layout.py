@@ -20,16 +20,20 @@ class HeaderLayout(HorizontalLayout):
         self.set_content_margins(0, 0, 0, 1)
         self.set_spacing(0)
 
+        image = ImageLabel(parent=self, pixmap=QPixmap(skyrus_logo), size=[30, 30])
+
         logo_layout = HorizontalLayout(self)
         logo_layout.set_content_margins(10, 0, 0, 0)
         logo_layout.set_spacing(0)
-        image = ImageLabel(parent=self, pixmap=QPixmap(skyrus_logo), size=[30, 30])
         logo_layout.add_widget(image, alignment=QtCore.Qt.AlignLeft)  # noqa
+
         buttons_layout = HorizontalLayout(self)
         buttons_layout.setFixedWidth(120)
         buttons_layout.set_content_margins(0, 0, 0, 0)
         buttons_layout.set_spacing(0)
+
         window = Storage().get("main_window")
+
         buttons_layout.add_widget(buttons.MinimizeButton(self, window), alignment=QtCore.Qt.AlignRight)  # noqa
         buttons_layout.add_widget(buttons.MaximizeButton(self, window), alignment=QtCore.Qt.AlignRight)  # noqa
         buttons_layout.add_widget(buttons.CloseButton(self), alignment=QtCore.Qt.AlignRight)  # noqa

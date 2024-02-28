@@ -11,7 +11,6 @@ def main():
     app = QApplication(sys.argv)
     Storage()
     window = MainWindow()
-    window.make()
 
     app.exec()
 

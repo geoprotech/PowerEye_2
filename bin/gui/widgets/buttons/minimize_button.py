@@ -17,3 +17,9 @@ class MinimizeButton(BaseButton):
         width, height = self.size().width(), self.size().height()
         width, height = (int(dimension * 0.1) for dimension in (width, height))
         self.setIconSize(QSize(width, height))
+
+    def on_emit(self):
+        """
+        not necessary here
+        @return:
+        """

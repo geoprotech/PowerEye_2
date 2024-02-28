@@ -1,5 +1,6 @@
 from abc import abstractmethod
 
+from PySide6 import QtCore
 from PySide6.QtWidgets import QLineEdit
 
 from bin.gui.decorators import init_protocol
@@ -17,6 +18,8 @@ class BaseLineEdit(QLineEdit):
 
     """
 
+    storage_signal = QtCore.Signal()
+
     @init_protocol
     def __init__(self, parent, *args, **kwargs):
         super().__init__(parent, *args, **kwargs)
@@ -27,12 +30,19 @@ class BaseLineEdit(QLineEdit):
         to be overridden
         """
 
+    @abstractmethod
+    def on_emit(self):
+        """
+        Functon that will be called after storage emit event.
+        """
+
     def pre_setup(self):
         """
         post setup config
         @return:
         """
         self.setStyleSheet(DEFAULT_LINE_EDIT_STYLESHEET)
+        self.storage_signal.connect(self.on_emit)
 
     def set_tooltip(self, text: str):
         """

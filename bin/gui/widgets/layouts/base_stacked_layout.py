@@ -28,6 +28,12 @@ class StackedLayout(BaseLayout):
         Function to create and configure layout. Must be overridden
         """
 
+    def on_emit(self):
+        """
+        not necessary here
+        @return:
+        """
+
     def add_tab(self, widget: QWidget, tab_name: str) -> None:
         """
         add new tab

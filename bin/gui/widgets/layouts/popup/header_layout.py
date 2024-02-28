@@ -13,13 +13,12 @@ class PopUpHeaderLayout(HorizontalLayout):
 
     def make(self):
         self._set_title()
-        self.setObjectName("pop_header")
+        self.setObjectName("popup_header")
         self.setStyleSheet(POP_UP_HEADER_STYLESHEET)
-        self.set_content_margins(0, 0, 0, 0)
+        self.set_content_margins(0, 0, 0, 1)
         self.set_spacing(0)
 
     def _set_title(self) -> None:
-        if self.title is not None:
-            title_label = PopUpLabel(self, text=self.title)
-            title_label.setContentsMargins(0, 0, 0, 0)
-            self.add_widget(title_label, alignment=Qt.AlignLeft)
+        title_label = PopUpLabel(self, text=self.title)
+        title_label.setContentsMargins(0, 0, 0, 0)
+        self.add_widget(title_label, alignment=Qt.AlignLeft)

@@ -1,14 +1,9 @@
-from abc import abstractmethod
-
 from PySide6.QtCore import Qt
 
-from .base_popup import BasePopUp
+from .base import BasePopUp
 from bin.gui.widgets.buttons import MaximizeButton, MinimizeButton
 from bin.gui.widgets.buttons.popup import PopUpCloseButton
 from bin.gui.widgets.layouts import HorizontalLayout
-
-
-# from bin.gui.widgets.stub import Color
 
 
 class PopUp(BasePopUp):
@@ -31,11 +26,16 @@ class PopUp(BasePopUp):
 
         self._header_layout.add_widget(header_control_panel, alignment=Qt.AlignRight)
 
-    @abstractmethod
     def make(self) -> None:
         """
         Function to create and configure layout. Must be overridden
 
             Example:
                 self.add_widget(Color('red'))
+        """
+
+    def on_emit(self):
+        """
+
+        @return:
         """

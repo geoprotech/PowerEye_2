@@ -4,7 +4,7 @@ from PySide6.QtGui import QPixmap
 import bin.gui.widgets.buttons as buttons
 from .base_horizontal_layout import HorizontalLayout
 from bin.gui.widgets.labels import ImageLabel
-from bin.storage import Storage
+from bin.storage import storage
 from src.icons import skyrus_logo
 from src.styles.components.widgets.layouts import HEADER_STYLESHEET
 
@@ -29,7 +29,7 @@ class HeaderLayout(HorizontalLayout):
         buttons_layout.setFixedWidth(120)
         buttons_layout.set_content_margins(0, 0, 0, 0)
         buttons_layout.set_spacing(0)
-        window = Storage().get_data("main_window")
+        window = storage.pull("main_window")
         buttons_layout.add_widget(buttons.MinimizeButton(self, window), alignment=QtCore.Qt.AlignRight)  # noqa
         buttons_layout.add_widget(buttons.MaximizeButton(self, window), alignment=QtCore.Qt.AlignRight)  # noqa
         buttons_layout.add_widget(buttons.CloseButton(self), alignment=QtCore.Qt.AlignRight)  # noqa

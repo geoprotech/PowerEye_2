@@ -2,7 +2,7 @@ from abc import abstractmethod
 
 from PySide6.QtWidgets import QLabel
 
-from bin.gui import init_protocol
+from bin.gui.decorators import init_protocol
 from src.styles.components.widgets.labels import DEFAULT_LABEL_STYLESHEET
 
 

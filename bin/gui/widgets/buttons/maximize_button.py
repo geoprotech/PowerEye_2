@@ -4,7 +4,7 @@ from PySide6.QtGui import QIcon
 
 import src.icons as icons
 from .base import BaseButton
-from bin.storage import Storage
+from bin.storage import storage
 from src.icons import ICONS_PATH
 from src.styles.components.widgets.buttons import WINDOW_CONTROL_BUTTON_STYLESHEET
 

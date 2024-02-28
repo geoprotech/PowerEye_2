@@ -5,7 +5,7 @@ from PySide6 import QtCore
 from PySide6.QtWidgets import QPushButton, QWidget
 
 import bin.exceptions as exceptions
-from bin.gui import init_protocol
+from bin.gui.decorators import init_protocol
 from bin.storage import storage
 
 

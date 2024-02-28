@@ -2,10 +2,10 @@ from typing import Any, Literal
 
 import PySide6.QtCore as QtCore
 
-from bin.exceptions import StorageException
+from bin.exceptions.storage_exception import StorageException
 
 
-class Storage(object):
+class Storage:
     _instance = None
 
     def __new__(cls, *args, **kwargs):

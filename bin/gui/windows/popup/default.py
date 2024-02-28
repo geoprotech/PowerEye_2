@@ -1,5 +1,3 @@
-from abc import abstractmethod
-
 from PySide6.QtCore import Qt
 
 from .base import BasePopUp
@@ -28,11 +26,16 @@ class PopUp(BasePopUp):
 
         self._header_layout.add_widget(header_control_panel, alignment=Qt.AlignRight)
 
-    @abstractmethod
     def make(self) -> None:
         """
         Function to create and configure layout. Must be overridden
 
             Example:
                 self.add_widget(Color('red'))
+        """
+
+    def on_emit(self):
+        """
+
+        @return:
         """

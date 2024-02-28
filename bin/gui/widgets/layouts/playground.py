@@ -1,5 +1,7 @@
 from PySide6.QtGui import QPixmap
+from PySide6.QtWidgets import QPushButton
 
+from bin.exceptions import VisiblePowereyeException
 from bin.gui.widgets.checkboxes import BaseCheckbox
 from bin.gui.widgets.comboboxes import DimensionalComboBox
 from bin.gui.widgets.labels import BaseLabel, ImageLabel
@@ -45,6 +47,13 @@ class PlaygroundLayout(VerticalLayout):
         )
         lay2.add_widget(DimensionalLineEdit(parent=self, unit=TmpUnit()))
         radio2.clicked.connect(lambda checked: print(checked))
+        btn_warning = QPushButton('error')
+        lay2.add_widget(btn_warning)
+
+        def sshow_popup():
+            VisiblePowereyeException('Долбень, неверное количество столбцов', 'info')
+
+        btn_warning.clicked.connect(sshow_popup)
 
         # label2_1 = BaseImageLabel(
         #     lay2, "Ali", pixmap=QPixmap(Path("C:\\Users\\artem\\Desktop\\powereye2\\PowerEye_2\\bin\\ali.png"))

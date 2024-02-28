@@ -17,3 +17,9 @@ class PopUpCloseButton(BaseButton):
         width, height = (int(dimension * 0.3) for dimension in (width, height))
         self.setIconSize(QSize(width, height))
         self.setStyleSheet(POP_UP_CONTROL_BUTTON_STYLESHEET)
+
+    def on_emit(self):
+        """
+
+        @return:
+        """

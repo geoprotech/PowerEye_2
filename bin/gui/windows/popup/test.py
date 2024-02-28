@@ -2,7 +2,10 @@ import sys
 
 from PySide6.QtWidgets import QApplication, QMainWindow, QPushButton
 
-from bin.gui.windows.popup import PopUp, WarningPopUp, YesNoPopUp
+from bin.gui.windows.popup import PopUp, YesNoPopUp
+
+
+# from bin.gui.windows.popup import WarningPopUp
 
 
 class MainWindow(QMainWindow):
@@ -10,6 +13,7 @@ class MainWindow(QMainWindow):
         super().__init__()
 
         self.setWindowTitle("Pop-up окно с PySide6")
+        self.setGeometry(100, 100, 400, 300)
 
         # Создаем кнопку
         button = QPushButton("Открыть Pop-up окно", self)
@@ -27,11 +31,12 @@ class MainWindow(QMainWindow):
             on_click_accept=MainWindow.ttt,
             on_click_reject=MainWindow.ttt,
         )
-        WarningPopUp(self, warning_text='Долбень, неверное количество столбцов')
+
+        # WarningPopUp(self, warning_text='Долбень, неверное количество столбцов')
         PopUp(self, title='Test')
 
 
-def run():
+if __name__ == '__main__':
     app = QApplication(sys.argv)
 
     # Создаем главное окно
@@ -40,6 +45,3 @@ def run():
 
     # Запускаем основной цикл обработки событий
     app.exec()
-
-
-run()

@@ -1,0 +1,11 @@
+QLabel{
+    border: none;
+    background-color: transparent;
+    color: white;
+    max-width: 134px;
+    min-width: 134px;
+    max-height: 40px;
+    font-weight: 600;
+    font-size: 28px;
+    padding-left: 5px;
+}

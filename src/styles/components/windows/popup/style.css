@@ -1,5 +1,8 @@
-PopUpWindow{
-    qproperty-geometry: rect(500 200 500 200);
+QDialog{
+    min-width: 400px;
+    min-height: 200px;
+    max-width: 400px;
+    max-height: 200px;
     font-family: Oxanium sans-serif;
     font-size: 10px;
 }

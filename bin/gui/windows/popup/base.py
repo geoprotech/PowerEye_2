@@ -1,7 +1,7 @@
 from abc import abstractmethod
 from typing import Literal
 
-from PySide6.QtCore import Qt
+from PySide6.QtCore import Qt, Signal
 from PySide6.QtWidgets import QDialog, QVBoxLayout, QWidget
 
 from bin.gui.decorators import init_protocol
@@ -25,6 +25,9 @@ class BasePopUp(QDialog):
     @return:
     """
 
+
+    storage_signal = Signal()
+
     body_layout_types = {"HBox": HorizontalLayout, "VBox": VerticalLayout, "Stacked": StackedLayout, "Grid": None}
 
     @init_protocol
@@ -35,7 +38,7 @@ class BasePopUp(QDialog):
         self.title = title
         self._main_layout: QVBoxLayout
         self._header_layout: BaseLayout
-        self._body_layout: BaseLayout = BasePopUp.body_layout_types.get(body_layout, "VBox")(self._parent)
+        self._body_layout: BaseLayout = self.body_layout_types.get(body_layout, "VBox")(self._parent)
 
         super().__init__(parent=parent, **kwargs)
 
@@ -56,6 +59,8 @@ class BasePopUp(QDialog):
         self.set_spacing(0)
         self.setLayout(self._main_layout)
 
+        self.storage_signal.connect(self.on_emit)
+
     @abstractmethod
     def make(self) -> None:
         """
@@ -63,6 +68,12 @@ class BasePopUp(QDialog):
 
             Example:
                 self.add_widget(Color('red'))
+        """
+
+    @abstractmethod
+    def on_emit(self):
+        """
+        Functon that will be called after storage emit event.
         """
 
     def add_widget(self, widget: QWidget, stretch: int = 0, alignment: Qt.AlignmentFlag or None = None) -> None:
@@ -79,6 +90,33 @@ class BasePopUp(QDialog):
             self._body_layout.add_widget(widget, stretch, alignment)
         else:
             self._body_layout.add_widget(widget, stretch)
+
+    def set_geometry(
+        self, width: int or None = None, height: int or None = None, x: int or None = None, y: int or None = None
+    ) -> None:
+        if (width is None) and (width is None):
+            """
+            Тут планируется из реализации Тимофея брать значения.
+            пример:
+                width = self.setStyleSheet(DEFAULT_POP_UP_STYLESHEET).general.width
+                height = self.setStyleSheet(DEFAULT_POP_UP_STYLESHEET).general.height
+                self.resize(width, height)
+            Возращает значения не из StyleSheet:
+                print(self.width())        :100
+                print(self.maximumWidth()) :16777215
+                print(self.minimumWidth()) :0
+            """
+            pass
+        else:
+            self.resize(width, height)
+
+        if (x is None) and (y is None):
+            self.move(
+                self.parent().x() + self.parent().width() // 2 - self.width() // 2,
+                self.parent().y() + self.parent().height() // 2 - self.height() // 2,
+            )
+        else:
+            self.move(x, y)
 
     def set_content_margins(self, left: int, top: int, right: int, bottom: int) -> None:
         self._body_layout.set_content_margins(left, top, right, bottom)

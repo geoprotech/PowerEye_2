@@ -2,14 +2,15 @@ import sys
 
 from PySide6.QtWidgets import QApplication
 
+from bin.exceptions.handler_visible_exception import HandlerException
 from bin.gui.windows import MainWindow
 from bin.storage import Storage
 
 
 def main():
-    Storage()
     app = QApplication(sys.argv)
     Storage()
+    HandlerException()
     window = MainWindow()
 
     app.exec()

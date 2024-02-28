@@ -15,7 +15,7 @@ class PopUpHeaderLayout(HorizontalLayout):
         self._set_title()
         self.setObjectName("popup_header")
         self.setStyleSheet(POP_UP_HEADER_STYLESHEET)
-        self.set_content_margins(0, 0, 0, 0)
+        self.set_content_margins(0, 0, 0, 1)
         self.set_spacing(0)
 
     def _set_title(self) -> None:

@@ -3,7 +3,7 @@ from typing import Literal
 
 class BasePowereyeException(Exception):
     def __init__(self, text: str, level: Literal["debug", "info", "warn", "error", "critical"] = "info") -> None:
-        super(BasePowereyeException, self).__init__(text)
+        super().__init__(text)
         self.text = text
         self.level = level
 

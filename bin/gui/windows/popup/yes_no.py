@@ -25,6 +25,8 @@ class YesNoPopUp(BasePopUp):
         super().__init__(parent=parent, body_layout="VBox", title=title)
 
     def make(self):
+        self.set_geometry()
+
         text_label = PopUpLabel(parent=self, text=self.message_text)
 
         buttons_layout = HorizontalLayout(self)
@@ -51,3 +53,9 @@ class YesNoPopUp(BasePopUp):
                 return func(*args, **kwargs)
 
             return wrapper
+
+    def on_emit(self):
+        """
+
+        @return:
+        """

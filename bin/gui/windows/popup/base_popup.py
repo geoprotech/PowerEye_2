@@ -33,7 +33,7 @@ class BasePopUp(QDialog):
         self.title = title
         self._main_layout: QVBoxLayout
         self._header_layout: BaseLayout
-        self._body_layout: BaseLayout = BasePopUp.body_layout_types.get(body_layout, "VBox")(parent)
+        self._body_layout: BaseLayout = BasePopUp.body_layout_types.get(body_layout, "VBox")(self._parent)
 
         super().__init__(parent=parent, **kwargs)
 

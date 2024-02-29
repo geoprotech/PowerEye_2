@@ -19,8 +19,6 @@ class PopUpHeaderLayout(HorizontalLayout):
         self.set_spacing(0)
 
     def _set_title(self) -> None:
-        if self.title is None:
-            self.title = ''
         title_label = PopUpLabel(self, text=self.title)
         title_label.setContentsMargins(0, 0, 0, 0)
         self.add_widget(title_label, alignment=Qt.AlignLeft)

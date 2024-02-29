@@ -8,9 +8,6 @@ from bin.gui.widgets.buttons.popup import PopUpCloseButton
 from bin.gui.widgets.layouts import HorizontalLayout
 
 
-# from bin.gui.widgets.stub import Color
-
-
 class PopUp(BasePopUp):
     """
     Base class PopUp Window

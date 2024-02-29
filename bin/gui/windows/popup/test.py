@@ -5,19 +5,6 @@ from PySide6.QtWidgets import QApplication, QMainWindow, QPushButton
 from bin.gui.windows.popup import PopUp, WarningPopUp, YesNoPopUp
 
 
-# from popup import PopUp
-
-
-# class PopUp1(PopUp):
-# def make(self):
-#     super().make()
-# self.set_geometry(500, 500, 400, 100)
-
-
-# from bin.gui.widgets.buttons.control_buttons import PopUpCloseButton
-# from bin.gui.widgets.stub import Color
-
-
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()

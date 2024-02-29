@@ -19,32 +19,28 @@ class YesNoPopUp(BasePopUp):
         on_click_reject: Callable or None,
     ) -> None:
         self.message_text = message_text
-        self.on_click_accept = self._deco_on_click(on_click_accept)
-        self.on_click_reject = self._deco_on_click(on_click_reject)
+        self.on_click_accept = self._decorator_onclick(on_click_accept)
+        self.on_click_reject = self._decorator_onclick(on_click_reject)
 
-        super().__init__(
-            parent=parent,
-            body_layout_type="VBox",
-            title=title,
-        )
+        super().__init__(parent=parent, body_layout="VBox", title=title)
 
     def make(self):
         text_label = PopUpLabel(parent=self, text=self.message_text)
 
-        button_layout = HorizontalLayout(self)
+        buttons_layout = HorizontalLayout(self)
 
-        button_layout.add_widget(
+        buttons_layout.add_widget(
             PopUpDefaultButton(parent=self, on_click=self.on_click_accept, text="Accept"), alignment=Qt.AlignCenter
         )
-        button_layout.add_widget(
+        buttons_layout.add_widget(
             PopUpDefaultButton(parent=self, on_click=self.on_click_reject, text="Reject"), alignment=Qt.AlignCenter
         )
-        button_layout.set_content_margins(0, 10, 0, 10)
+        buttons_layout.set_content_margins(0, 10, 0, 10)
 
         self.add_widget(text_label, alignment=Qt.AlignCenter)
-        self.add_widget(button_layout)
+        self.add_widget(buttons_layout)
 
-    def _deco_on_click(self, func: Callable or None) -> Callable:
+    def _decorator_onclick(self, func: Callable or None) -> Callable:
         if func is None:
             return self.close
 

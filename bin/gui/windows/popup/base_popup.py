@@ -5,24 +5,35 @@ from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QDialog, QVBoxLayout, QWidget
 
 from bin.gui.decorators import init_protocol
-from bin.gui.widgets import HorizontalLayout, VerticalLayout
+from bin.gui.widgets import BaseLayout, HorizontalLayout, VerticalLayout
 from bin.gui.widgets.layouts.popup import PopUpHeaderLayout
 from src.styles.components.windows import DEFAULT_POP_UP_STYLESHEET
 
 
 class BasePopUp(QDialog):
+    """
+    brief:
+
+     self contain:
+            -------------------------------------------
+            |            header_layout                 |
+            -------------------------------------------
+            |            body_layout                  |
+            -------------------------------------------
+
+
+    @return:
+    """
+
     body_layout_types = {"HBox": HorizontalLayout, "VBox": VerticalLayout}
 
     @init_protocol
-    def __init__(
-        self, parent: QWidget, body_layout_type: Literal["HBox", "VBox"], title: str or None, **kwargs
-    ) -> None:
-        self._body_layout_type = body_layout_type
+    def __init__(self, parent: QWidget, body_layout: Literal["HBox", "VBox"], title: str or None, **kwargs) -> None:
         self._parent = parent
         self.title = title
         self._main_layout: QVBoxLayout
-        self._header_layout: QWidget
-        self._body_layout: QWidget
+        self._header_layout: BaseLayout
+        self._body_layout: BaseLayout = BasePopUp.body_layout_types.get(body_layout, "VBox")(parent)
 
         super().__init__(parent=parent, **kwargs)
 
@@ -37,11 +48,10 @@ class BasePopUp(QDialog):
         self._header_layout = PopUpHeaderLayout(parent=self, title=self.title)  # noqa
         self._main_layout.addWidget(self._header_layout)
 
-        self._body_layout = BasePopUp.body_layout_types.get(self._body_layout_type, "VBox")(self._parent)  # noqa
         self._body_layout.set_content_margins(0, 0, 0, 0)
-        self.set_spacing(0)
         self._main_layout.addWidget(self._body_layout)
 
+        self.set_spacing(0)
         self.setLayout(self._main_layout)
 
     @abstractmethod

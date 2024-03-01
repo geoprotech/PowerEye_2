@@ -2,7 +2,7 @@ from abc import abstractmethod
 
 from PySide6.QtCore import Qt
 
-from .base_popup import BasePopUp
+from .base import BasePopUp
 from bin.gui.widgets.buttons import MaximizeButton, MinimizeButton
 from bin.gui.widgets.buttons.popup import PopUpCloseButton
 from bin.gui.widgets.layouts import HorizontalLayout

@@ -28,7 +28,9 @@ class BasePopUp(QDialog):
     body_layout_types = {"HBox": HorizontalLayout, "VBox": VerticalLayout, "Stacked": StackedLayout, "Grid": None}
 
     @init_protocol
-    def __init__(self, parent: QWidget, body_layout: Literal["HBox", "VBox"], title: str or None, **kwargs) -> None:
+    def __init__(
+        self, parent: QWidget, body_layout: Literal["HBox", "VBox"] = "VBox", title: str or None = None, **kwargs
+    ) -> None:
         self._parent = parent
         self.title = title
         self._main_layout: QVBoxLayout

@@ -23,17 +23,12 @@ class MainWindow(QMainWindow):
     def sshow_popup(self):
         YesNoPopUp(
             self,
-            None,
             'Долбень, неверное количество столбцов',
             on_click_accept=MainWindow.ttt,
             on_click_reject=MainWindow.ttt,
         )
-        WarningPopUp(self, 'Title', 'Долбень, неверное количество столбцов')
-        PopUp(
-            self,
-            'VBox',
-            None,
-        )
+        WarningPopUp(self, warning_text='Долбень, неверное количество столбцов')
+        PopUp(self, title='Test')
 
 
 def run():

@@ -2,7 +2,7 @@ from PySide6.QtCore import Qt
 from PySide6.QtGui import QPixmap
 from PySide6.QtWidgets import QWidget
 
-from .base_popup import BasePopUp
+from .base import BasePopUp
 from bin.gui.widgets.buttons.popup import PopUpDefaultButton
 from bin.gui.widgets.labels.popup import PopUpImageLabel, PopUpLabel
 from bin.gui.widgets.layouts import HorizontalLayout
@@ -10,7 +10,7 @@ from src.icons import warning_icon
 
 
 class WarningPopUp(BasePopUp):
-    def __init__(self, parent: QWidget, title: str or None, warning_text: str) -> None:
+    def __init__(self, parent: QWidget, warning_text: str, title: str or None = None) -> None:
         self.warning_text = warning_text
         super().__init__(parent=parent, body_layout="VBox", title=title)
 

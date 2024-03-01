@@ -5,7 +5,7 @@ from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QDialog, QVBoxLayout, QWidget
 
 from bin.gui.decorators import init_protocol
-from bin.gui.widgets import BaseLayout, HorizontalLayout, VerticalLayout
+from bin.gui.widgets import BaseLayout, HorizontalLayout, StackedLayout, VerticalLayout
 from bin.gui.widgets.layouts.popup import PopUpHeaderLayout
 from src.styles.components.windows import DEFAULT_POP_UP_STYLESHEET
 
@@ -25,7 +25,7 @@ class BasePopUp(QDialog):
     @return:
     """
 
-    body_layout_types = {"HBox": HorizontalLayout, "VBox": VerticalLayout}
+    body_layout_types = {"HBox": HorizontalLayout, "VBox": VerticalLayout, "Stacked": StackedLayout, "Grid": None}
 
     @init_protocol
     def __init__(self, parent: QWidget, body_layout: Literal["HBox", "VBox"], title: str or None, **kwargs) -> None:

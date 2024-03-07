@@ -2,6 +2,7 @@ from .base_horizontal_layout import HorizontalLayout
 from .base_vertical_layout import VerticalLayout
 from .header_layout import HeaderLayout
 from .left_menu import LeftMenu
+from .left_menu_stub import LeftMenuStub
 from .main_workspace import MainWorkspaceLayout
 
 
@@ -42,8 +43,10 @@ class MainLayout(VerticalLayout):
         main_layout.set_content_margins(0, 0, 0, 0)
         main_layout.set_spacing(0)
 
+        LeftMenu(parent=self).show()  # not in any layout
+
         # add widgets to main layout
-        main_window.add_widget(LeftMenu(parent=self))
+        main_window.add_widget(LeftMenuStub(parent=self))  # just void background
         main_window.add_widget(main_layout)
 
         # add header and main layout

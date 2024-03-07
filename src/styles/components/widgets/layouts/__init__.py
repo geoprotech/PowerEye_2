@@ -1,4 +1,5 @@
-from .left_menu import *
 from .header import HEADER_STYLESHEET
 from .header_logo_layout import HEADER_LOGO_LAYOUT_STYLESHEET
 from .header_buttons_layout import HEADER_BUTTONS_LAYOUT_STYLESHEET
+from .left_menu_over import LEFT_MENU_OVER_STYLESHEET
+from .left_menu_stub import LEFT_MENU_STUB_STYLESHEET

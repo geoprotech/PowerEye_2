@@ -23,15 +23,9 @@ class ImageLabel(BaseLabel):
         super().__init__(parent, text=text)
 
     def pre_setup(self):
-        # if not self._size:
-        #     self._size = (200, 200)
-        # if self._pixmap:
-        #     self.set_pixmap(self._pixmap)
-
         self.setStyleSheet(DEFAULT_IMAGE_LABEL_STYLESHEET)
         if not self._size:
             self._size = self.size().width(), self.size().height()
-        print(self._size, self.size())
         self.set_pixmap(self._pixmap, self._size)
 
     def make(self):

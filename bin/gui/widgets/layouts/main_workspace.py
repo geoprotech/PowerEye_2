@@ -3,7 +3,6 @@ import PySide6.QtCore as QtCore
 from ..stub import Color
 from .base_stacked_layout import StackedLayout
 from .playground import PlaygroundLayout
-from bin.storage import storage
 
 
 TAB_NAMES = ["menu", "enter_data", "parameters", "trajectory", "tnd", "mask_group", "custom_graph", "stats"]
@@ -53,13 +52,7 @@ class MainWorkspaceLayout(StackedLayout):
         """
         connect tabs to signals
         """
-
-        def stub():
-            self.switch_tab("menu")
-            storage.push("close_data", ["test", 123, True])
-            storage.emit("close_data")
-
-        self.switch_to_menu.connect(stub)
+        self.switch_to_menu.connect(lambda: self.switch_tab("menu"))
         self.switch_to_enter_data.connect(lambda: self.switch_tab("enter_data"))
         self.switch_to_parameters.connect(lambda: self.switch_tab("parameters"))
         self.switch_to_trajectory.connect(lambda: self.switch_tab("trajectory"))

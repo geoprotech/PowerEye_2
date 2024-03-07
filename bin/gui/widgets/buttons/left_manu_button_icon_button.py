@@ -3,7 +3,7 @@ from PySide6.QtGui import QIcon
 
 from .base import BaseButton
 from src.icons import ICONS_PATH
-from src.styles.components.widgets.buttons import LEFT_MENU_OVER_BUTTON_STYLESHEET
+from src.styles.components.widgets.buttons import LEFT_MENU_BUTTON_STYLESHEET
 
 
 class LeftMenuIconButton(BaseButton):
@@ -20,7 +20,7 @@ class LeftMenuIconButton(BaseButton):
     def make(self):
         self.setText(f"   {self.text}")  # for distance between icon and text
         self.setIcon(QIcon(str(ICONS_PATH.joinpath(self.__icon))))
-        self.setStyleSheet(LEFT_MENU_OVER_BUTTON_STYLESHEET)
+        self.setStyleSheet(LEFT_MENU_BUTTON_STYLESHEET)
         size = self.size()
         icon_width = 45
         icon_height = size.height()

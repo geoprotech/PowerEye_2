@@ -1,6 +1,6 @@
 QWidget{
-    font-size: 40px;
     max-width: 60px;
+    min-width: 60px;
     background-color: #28bfc9;
     height: 100%;
 }

@@ -1,26 +1,32 @@
-from typing import Any, Literal
+from typing import Any
 
 import PySide6.QtCore as QtCore
+import typing_extensions
+from PySide6.QtCore import Signal
 
-from bin.exceptions.storage_exception import StorageException
+from bin.exceptions import StorageException
 
 
-class Storage:
+class StorageDataField(typing_extensions.TypedDict):
+    value: Any
+    signals: list[Signal]
+
+
+class Storage(object):
     _instance = None
 
-    def __new__(cls, *args, **kwargs):
+    def __new__(cls) -> 'Storage':
         if not isinstance(cls._instance, cls):
-            cls._data: dict[str : dict[Literal["value"] : Any, Literal["signals"] : list[QtCore.Signal]]] = {}
+            cls._data: dict[str, StorageDataField] = {}
             cls._instance = object.__new__(cls)
         return cls._instance
 
-    def emit(self, key: str):
+    def emit(self, key: str) -> None:
         if key not in self._data:
             raise StorageException(f"No key found: {key}.")
 
         if len(self._data[key]["signals"]) == 0:
             raise StorageException(f"No comparable signal found for key: {key}.")
-
         for signal in self._data[key]["signals"]:
             signal.emit()
 
@@ -30,7 +36,7 @@ class Storage:
         else:
             self._data[key] = {"value": None, "signals": [signal]}
 
-    def disconnect(self, key: str, signal: QtCore.Signal) -> QtCore.Signal:
+    def disconnect(self, key: str, signal: QtCore.Signal) -> None:
         if key not in self._data:
             raise StorageException(f"No key found: '{key}'.")
 

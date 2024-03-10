@@ -55,6 +55,7 @@ exclude = '''
     | \.pytest_cache
     | \.venv
     | venv
+    | .venv
     | backend_utils
   )/
 )

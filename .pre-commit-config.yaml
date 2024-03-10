@@ -32,5 +32,5 @@ repos:
     rev: v1.7.1
     hooks:
       - id: mypy
-        files: ^Bin/
+        files: ^bin/
         args: ["--config-file", "./pyproject.toml"]

@@ -25,7 +25,6 @@ class BasePopUp(QDialog):
     @return:
     """
 
-
     storage_signal = Signal()
 
     body_layout_types = {"HBox": HorizontalLayout, "VBox": VerticalLayout, "Stacked": StackedLayout, "Grid": None}

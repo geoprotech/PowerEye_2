@@ -12,7 +12,6 @@ def main():
     Storage()
     HandlerException()
     window = MainWindow()
-    window.make()
 
     app.exec()
 

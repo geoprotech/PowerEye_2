@@ -2,7 +2,6 @@ import sys
 
 from PySide6.QtWidgets import QApplication, QMainWindow, QPushButton
 
-
 from bin.gui.windows.popup import PopUp, YesNoPopUp
 
 

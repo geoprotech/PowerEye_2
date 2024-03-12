@@ -10,7 +10,6 @@ from src.icons import warning_icon
 
 
 class WarningPopUp(BasePopUp):
-
     def __init__(self, warning_text: str, title: str or None = None) -> None:
         self.warning_text = warning_text
         parent = Storage().get("main_window")

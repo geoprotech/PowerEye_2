@@ -59,14 +59,9 @@ class LeftMenu(VerticalLayout):
         self._layout.setSpacing(0)
 
         # geometry should be initialized here cause it not static
-        self.setGeometry(
-            self.initial_geometry["x"],
-            self.initial_geometry["y"],
-            self.initial_geometry["width"],
-            self.initial_geometry["height"],
-        )
+        self.setGeometry(*list(INITIAL_GEOMETRY.values()))
 
-        self.init_animation()
+        self.__init_animation()
         self.init_buttons()
 
         for button in self.buttons.values():
@@ -86,7 +81,7 @@ class LeftMenu(VerticalLayout):
         self.buttons["custom_graph"].add_onclick_event(MainWorkspaceLayout.instance.switch_to_custom_graph.emit)
         self.buttons["stats"].add_onclick_event(MainWorkspaceLayout.instance.switch_to_stats.emit)
 
-    def init_animation(self):
+    def __init_animation(self):
         # setup enlarge animation
         self.__enlarge_animation.setDuration(ANIMATION_DURATION)  # Длительность анимации в миллисекундах
         self.__enlarge_animation.setStartValue(QSize(self.initial_geometry["width"], self.initial_geometry["height"]))

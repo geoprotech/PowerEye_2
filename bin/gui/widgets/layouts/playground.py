@@ -1,6 +1,7 @@
 from PySide6.QtGui import QPixmap
 
 from bin.gui.widgets.checkboxes import BaseCheckbox
+from bin.gui.widgets.combobox import DimComboBox
 from bin.gui.widgets.labels import BaseLabel, ImageLabel
 from bin.gui.widgets.layouts import HorizontalLayout, VerticalLayout
 from bin.gui.widgets.line_edit import BaseLineEdit
@@ -38,6 +39,9 @@ class PlaygroundLayout(VerticalLayout):
         lay2.add_widget(input2)
         lay2.add_widget(radio2)
         lay2.add_widget(image)
+        lay2.add_widget(
+            DimComboBox(parent=self, options=["Option 1", "Option 2", "Option3"], on_change=lambda x: print(x))
+        )
         radio2.clicked.connect(lambda checked: print(checked))
 
         # label2_1 = BaseImageLabel(

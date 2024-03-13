@@ -3,3 +3,4 @@ from .layouts import *
 from .labels import *
 from .line_edit import *
 from .checkboxes import *
+from .combobox import *

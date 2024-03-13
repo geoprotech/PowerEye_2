@@ -41,8 +41,8 @@ class LeftMenu(VerticalLayout):
         self.buttons: Dict[buttons.LeftMenuIconButton] = {}
         self.button_names = list(BUTTONS_CONFIG.keys())
 
-        self.enlarge_animation: QPropertyAnimation
-        self.hide_animation: QPropertyAnimation
+        self.__enlarge_animation: QPropertyAnimation
+        self.__hide_animation: QPropertyAnimation
 
         self.maximized = False  # initial state: True if maximized
         self.initial_geometry = INITIAL_GEOMETRY
@@ -51,8 +51,8 @@ class LeftMenu(VerticalLayout):
 
     def make(self):
         # initialize size animations
-        self.enlarge_animation = QPropertyAnimation(self, b"size")
-        self.hide_animation = QPropertyAnimation(self, b"size")
+        self.__enlarge_animation = QPropertyAnimation(self, b"size")
+        self.__hide_animation = QPropertyAnimation(self, b"size")
 
         self.setStyleSheet(LEFT_MENU_OVER_STYLESHEET)
         self.set_content_margins(0, 0, 0, 0)
@@ -88,16 +88,16 @@ class LeftMenu(VerticalLayout):
 
     def init_animation(self):
         # setup enlarge animation
-        self.enlarge_animation.setDuration(ANIMATION_DURATION)  # Длительность анимации в миллисекундах
-        self.enlarge_animation.setStartValue(QSize(self.initial_geometry["width"], self.initial_geometry["height"]))
-        self.enlarge_animation.setEndValue(
+        self.__enlarge_animation.setDuration(ANIMATION_DURATION)  # Длительность анимации в миллисекундах
+        self.__enlarge_animation.setStartValue(QSize(self.initial_geometry["width"], self.initial_geometry["height"]))
+        self.__enlarge_animation.setEndValue(
             QSize(self.enlarged_geometry["width"], self.enlarged_geometry["height"])
         )  # Сдвиг влево на 100 пикселей
 
         # setup hide animation
-        self.hide_animation.setDuration(ANIMATION_DURATION)  # Длительность анимации в миллисекундах
-        self.hide_animation.setStartValue(QSize(self.enlarged_geometry["width"], self.enlarged_geometry["height"]))
-        self.hide_animation.setEndValue(
+        self.__hide_animation.setDuration(ANIMATION_DURATION)  # Длительность анимации в миллисекундах
+        self.__hide_animation.setStartValue(QSize(self.enlarged_geometry["width"], self.enlarged_geometry["height"]))
+        self.__hide_animation.setEndValue(
             QSize(self.initial_geometry["width"], self.initial_geometry["height"])
         )  # Сдвиг влево на 100 пикселей
 
@@ -109,11 +109,11 @@ class LeftMenu(VerticalLayout):
         self.start_hide_animation() if self.maximized else self.start_enlarge_animation()
 
     def start_enlarge_animation(self):
-        self.enlarge_animation.start()
+        self.__enlarge_animation.start()
         self.maximized = True
 
     def start_hide_animation(self):
-        self.hide_animation.start()
+        self.__hide_animation.start()
         self.maximized = False
 
     def leaveEvent(self, event):  # noqa

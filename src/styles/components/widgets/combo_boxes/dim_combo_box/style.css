@@ -1,16 +1,14 @@
 QComboBox{
     min-width: 50px;
     max-width: 50px;
+    min-height: 40px;
+    max-height: 40px;
     border: none;
-    border-radius: 2px;
-    background-color: #28b3bd;
-    color: white;
+    color: #28bfc9;
+    background-color: white;
     text-align: center;
     font-size: 14px;
     font-weight: 600;
-    padding: 0;
-    margin: 0;
-    spacing: 5px
 }
 QComboBox::drop-down {
     width: 0px;
@@ -18,4 +16,8 @@ QComboBox::drop-down {
 }
 QComboBox::down-arrow {
     image: none;
+}
+QComboBox QAbstractItemView {
+    background-color: white; /* Цвет фона выпадающего списка */
+    color: #28bfc9; /* Цвет текста в выпадающем списке */
 }

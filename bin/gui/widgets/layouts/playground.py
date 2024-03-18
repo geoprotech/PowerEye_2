@@ -14,6 +14,7 @@ class PlaygroundLayout(VerticalLayout):
         super().__init__(parent)
 
     def make(self):
+        self.setStyleSheet("background-color: white")
         # Line 1 | label1 | input1 |
         lay1 = HorizontalLayout(self)
         label = BaseLabel(parent=self, text="Parameter")

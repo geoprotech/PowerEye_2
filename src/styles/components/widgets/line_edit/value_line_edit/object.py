@@ -1,4 +1,4 @@
 from src.styles.stylesheet import stylesheet
 
 
-DIM_LABEL_STYLESHEET = stylesheet(__file__)
+VALUE_LINE_EDIT = stylesheet(__file__)

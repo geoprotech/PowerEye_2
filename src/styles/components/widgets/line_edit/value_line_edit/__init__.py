@@ -1,3 +1,3 @@
 from .object import (
-    DIM_COMBO_BOX,
+    VALUE_LINE_EDIT,
 )

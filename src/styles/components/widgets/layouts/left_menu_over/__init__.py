@@ -1,3 +1,3 @@
 from .object import (
-    LEFT_MENU_OVER_STYLESHEET,
+    LEFT_MENU_HOVER_STYLESHEET,
 )

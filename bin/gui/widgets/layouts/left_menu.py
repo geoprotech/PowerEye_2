@@ -7,7 +7,7 @@ import src.icons as icons
 import bin.gui.widgets.buttons as buttons
 from .base_vertical_layout import VerticalLayout
 from .main_workspace import MainWorkspaceLayout
-from src.styles.components.widgets import LEFT_MENU_OVER_STYLESHEET
+from src.styles.components.widgets import LEFT_MENU_HOVER_STYLESHEET
 
 
 BUTTONS_CONFIG = {
@@ -54,7 +54,7 @@ class LeftMenu(VerticalLayout):
         self.__enlarge_animation = QPropertyAnimation(self, b"size")
         self.__hide_animation = QPropertyAnimation(self, b"size")
 
-        self.setStyleSheet(LEFT_MENU_OVER_STYLESHEET)
+        self.setStyleSheet(LEFT_MENU_HOVER_STYLESHEET)
         self.set_content_margins(0, 0, 0, 0)
         self._layout.setSpacing(0)
 

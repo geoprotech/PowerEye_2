@@ -1,16 +1,18 @@
 QLineEdit{
-    border: 1px solid black;
-    border-radius: 2px;
-    background-color: #28bfc9;
-    color: white;
+    border: none;
+    border-radius: 15px;
+    background-color: #eeeff4;
+    color: #28bfc9;
     font-size: 14px;
-    font-weight: 600;
-    max-width: 134px;
-    min-width: 134px;
+    font-weight: 400;
+    max-width: 60px;
+    min-width: 60px;
     max-height: 30px;
-    qproperty-alignment: AlignRight;
+    text-align: center;
+    padding-bottom: 4px;
+    qproperty-alignment: AlignCenter;
 }
 
 QLineEdit:focus{
-    background-color: red;
+    border: 1px solid #28bfc9;
 }

@@ -1,0 +1,11 @@
+QWidget #DimLineEdit {
+    border: none;
+    border-radius: 2px;
+    background-color: white;
+    font-size: 14px;
+    font-weight: 600;
+    max-width: 300px;
+    min-width: 300px;
+    max-height: 40px;
+    min-height: 40px;
+}

@@ -2,10 +2,11 @@ import PySide6.QtCore as QtCore
 
 from ..stub import Color
 from .base_stacked_layout import StackedLayout
+from .enter_data import EnterData
 from .playground import PlaygroundLayout
 
 
-TAB_NAMES = ["menu", "enter_data", "parameters", "trajectory", "tnd", "mask_group", "custom_graph", "stats"]
+TAB_NAMES = ["menu", "parameters", "trajectory", "tnd", "mask_group", "custom_graph", "stats"]
 
 
 class MainWorkspaceLayout(StackedLayout):
@@ -42,11 +43,12 @@ class MainWorkspaceLayout(StackedLayout):
         """
         сейчас забито пустышками, далее будут реальные вкладки
         """
-        tab_colors = ["red", "orange", "yellow", "green", "blue", "purple", "gray", "pink"]
+        tab_colors = ["red", "orange", "yellow", "blue", "purple", "gray", "pink"]
         for color, name in zip(tab_colors, TAB_NAMES):
             self.add_tab(Color(color), tab_name=name)
             # self.add_tab(QWidget(), tab_name=name)
         self.add_tab(PlaygroundLayout(parent=self), tab_name="test")
+        self.add_tab(EnterData(parent=self), tab_name="enter_data")
 
     def __connect_tabs_to_signals(self):
         """

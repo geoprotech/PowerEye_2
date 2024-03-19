@@ -1,5 +1,5 @@
 from bin.gui.widgets.layouts import HorizontalLayout, VerticalLayout
-from bin.gui.widgets.line_edit import DimLineEdit, TmpUnit
+from bin.gui.widgets.line_edit import DimensionalLineEdit, TmpUnit
 
 
 class EnterDataInputLayout(VerticalLayout):
@@ -13,6 +13,6 @@ class EnterDataInputLayout(VerticalLayout):
     def __fill_data(self):
         for i in range(5):
             tmp_layout = HorizontalLayout(self)
-            tmp_layout.add_widget(DimLineEdit(parent=self, unit=TmpUnit()))
-            tmp_layout.add_widget(DimLineEdit(parent=self, unit=TmpUnit()))
+            tmp_layout.add_widget(DimensionalLineEdit(parent=self, unit=TmpUnit()))
+            tmp_layout.add_widget(DimensionalLineEdit(parent=self, unit=TmpUnit()))
             self.add_widget(tmp_layout)

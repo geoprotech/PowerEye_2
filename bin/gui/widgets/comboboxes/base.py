@@ -9,10 +9,10 @@ from bin.gui.decorators import init_protocol
 
 class BaseComboBox(QComboBox):
     """
-    Base abstract class for all buttons.
+    Base abstract class for all combo boxes.
 
     methods:
-        make(): Function to create button. Must be overwritten.
+        make(): Function to create combobox. Must be overwritten.
 
     """
 
@@ -21,11 +21,11 @@ class BaseComboBox(QComboBox):
     @init_protocol
     def __init__(self, parent: QWidget, options: list[str], on_change: Union[Callable[[str], None], None] = None):
         super().__init__(parent=parent)
-        self.on_choose = on_change
+        self.on_change = on_change
         self.options = options
 
     def pre_setup(self):
-        self.currentTextChanged.connect(self.on_choose)
+        self.currentTextChanged.connect(self.on_change)
         self.storage_signal.connect(self.on_emit)
         self.addItems(self.options)
 

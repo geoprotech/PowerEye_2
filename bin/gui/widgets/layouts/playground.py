@@ -1,10 +1,10 @@
 from PySide6.QtGui import QPixmap
 
 from bin.gui.widgets.checkboxes import BaseCheckbox
-from bin.gui.widgets.combobox import DimComboBox
+from bin.gui.widgets.comboboxes import DimensionalComboBox
 from bin.gui.widgets.labels import BaseLabel, ImageLabel
 from bin.gui.widgets.layouts import HorizontalLayout, VerticalLayout
-from bin.gui.widgets.line_edit import BaseLineEdit, DimLineEdit, TmpUnit
+from bin.gui.widgets.line_edit import BaseLineEdit, DimensionalLineEdit, TmpUnit
 from bin.gui.widgets.radiobuttons import BaseRadioButton
 from src.icons import skyrus_logo
 
@@ -41,9 +41,9 @@ class PlaygroundLayout(VerticalLayout):
         lay2.add_widget(radio2)
         lay2.add_widget(image)
         lay2.add_widget(
-            DimComboBox(parent=self, options=["Option 1", "Option 2", "Option3"], on_change=lambda x: print(x))
+            DimensionalComboBox(parent=self, options=["Option 1", "Option 2", "Option3"], on_change=lambda x: print(x))
         )
-        lay2.add_widget(DimLineEdit(parent=self, unit=TmpUnit()))
+        lay2.add_widget(DimensionalLineEdit(parent=self, unit=TmpUnit()))
         radio2.clicked.connect(lambda checked: print(checked))
 
         # label2_1 = BaseImageLabel(

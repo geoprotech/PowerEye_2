@@ -1,4 +1,4 @@
 from src.styles.stylesheet import stylesheet
 
 
-DIM_LINE_EDIT = stylesheet(__file__)
+DIMENSIONAL_LINE_EDIT = stylesheet(__file__)

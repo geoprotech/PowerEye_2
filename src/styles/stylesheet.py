@@ -1,3 +1,5 @@
+import re
+import sys
 import logging
 from pathlib import Path
 
@@ -17,9 +19,6 @@ def stylesheet(file):
     return data
 
 
-#
-
-
 CUSTOM_OPTIONS = [
     "spacing",
     "width",
@@ -28,32 +27,14 @@ CUSTOM_OPTIONS = [
     "geometry",
 ]
 
-DEFAULT_BLOCK_NAME = "general"
+DEFAULT_BLOCK_NAME = "QWidget"
 
 
 class Stylesheet(str):
     def __init__(self, template: str):
         self.template = template
-        self.blocks: dict[str, StylesheetBlock] = {}
+        self._blocks: dict[str, StylesheetBlock] = {}
         self._parse_template()
-
-    def __add__(self, other):
-        if not isinstance(other, Stylesheet):
-            raise StylesheetException(f"Not implemented operator '+' for Stylesheet and {type(other)}", "info")
-
-        all_blocks = set(list(self.blocks.keys()) + list(other.blocks.keys()))
-
-        result_template = ""
-
-        for block in list(all_blocks):
-            if hasattr(self, block) and hasattr(other, block):
-                result_template += self.__dict__[block] + other.__dict__[block]
-            else:
-                try:
-                    result_template += self.__dict__[block]
-                except AttributeError:
-                    result_template += other.__dict__[block]
-        return Stylesheet(result_template)
 
     def _parse_template(self):
         sheet = cssutils.parseString(self.template)
@@ -61,12 +42,25 @@ class Stylesheet(str):
         for rule in sheet:
             block_header = rule.selectorText
 
-            current_block_name = DEFAULT_BLOCK_NAME
-            if "#" in block_header:
-                current_block_name = block_header[block_header.find("#") + 1 :]
+            current_block_name = block_header.split()[0] if len(block_header.split()) else DEFAULT_BLOCK_NAME
 
-            self.blocks[current_block_name] = StylesheetBlock(block_header + " {\n" + rule.style.cssText + ";} \n")
-            setattr(self, current_block_name, self.blocks[current_block_name])
+            if current_block_name in self._blocks:
+                if len(block_header.split()) > 1:
+                    self._blocks[current_block_name].add_sub_block(
+                        block_header.split()[-1].replace("#", ""),
+                        block_header + " {\n" + rule.style.cssText + ";\n} \n",
+                    )
+                else:
+                    print(
+                        f"Warning! Duplicate name '{block_header.split()[0]}' for stylesheet in directory: "
+                        f"{Path(__file__).parent}, last definition will be used.",
+                        file=sys.stderr,
+                    )
+            else:
+                self._blocks[current_block_name] = StylesheetBlock(
+                    block_header + " {\n" + rule.style.cssText + ";\n} \n"
+                )
+                setattr(self, current_block_name, self._blocks[current_block_name])
 
     @classmethod
     def read(cls, file: Path):
@@ -79,87 +73,44 @@ class Stylesheet(str):
 class StylesheetBlock(str):
     def __init__(self, template: str):
         self.template = template
+        self._sub_blocks: dict[str, StylesheetBlock] = {}
         self._parse_template()
 
-    def __add__(self, other):
-        if not isinstance(other, StylesheetBlock):
-            raise StylesheetException(f"Not implemented operator '+' for StylesheetBlock and {type(other)}", "info")
-        self_sheet = cssutils.parseString(self.template)
-        other_sheet = cssutils.parseString(other.template)
-        header = ""
-        self_body = ""
-        other_body = ""
-        for rule in self_sheet:
-            header = rule.selectorText
-            self_body = rule.style.cssText
-
-        for rule in other_sheet:
-            header = rule.selectorText
-            other_body = rule.style.cssText
-
-        return StylesheetBlock(header + " {\n" + self_body + ";\n" + other_body + ";} \n")
-
     def _parse_template(self):
-        correspondences = {key: self.strip_units for key in CUSTOM_OPTIONS}
-        correspondences.update({"geometry": self.strip_geometry})  # noqa
-        correspondences.update({"margin": self.strip_margin})  # noqa
-
         sheet = cssutils.parseString(self.template)
 
         for rule in sheet:
             for option in rule.style:
-                if "custom-" in option.name:
-                    custom_option_name = option.name[option.name.find("custom-") + 7 :]
+                if option.name.startswith("custom-"):
+                    custom_option_name = option.name.replace("custom-", "")
 
                     if custom_option_name not in CUSTOM_OPTIONS:
                         raise StylesheetException(f"fWrong custom option name: {custom_option_name}", "info")
 
-                    setattr(self, custom_option_name, correspondences[custom_option_name](option.value))
+                    setattr(self, custom_option_name, self.strip_units(option.value))
+                else:
+                    setattr(self, option.name.replace("-", "_"), option.value)
+
+    def add_sub_block(self, sub_block_name: str, template: str) -> None:
+        if sub_block_name in self._sub_blocks:
+            print(
+                f"Warning! Duplicate name '{sub_block_name}' for stylesheet in directory: "
+                f"{Path(__file__).parent}, last definition will be used.",
+                file=sys.stderr,
+            )
+
+        self._sub_blocks[sub_block_name] = StylesheetBlock(template)
+        setattr(self, sub_block_name.replace("-", "_"), StylesheetBlock(template))
 
     @staticmethod
     def strip_units(string: str):
-        idx = 0
-        for symbol in string:
-            if symbol.isdigit():
-                digit_string = symbol
-                digit_idx = idx + 1
-                while digit_idx < len(string):
-                    if string[digit_idx].isdigit():
-                        digit_string += string[digit_idx]
-
-                    else:
-                        return int(digit_string)
-                    digit_idx += 1
-
-                return int(digit_string)
-
-            idx += 1
-
-    @staticmethod
-    def strip_margin(string: str):
-        result = []
-        for margin_part in string.split():
-            if margin_part != " ":
-                result.append(StylesheetBlock.strip_units(margin_part))
-
-        return result
-
-    @staticmethod
-    def strip_geometry(string: str):
-        result = []
-        temp = string.replace("x", " ").replace("+", " ").replace(",", " ")
-        for geometry_part in temp.split():
-            if geometry_part != " ":
-                result.append(StylesheetBlock.strip_units(geometry_part))
-
-        return result
+        re_digits = re.compile(r"\d+")
+        return re_digits.findall(string)
 
 
 if __name__ == "__main__":
     filename = Path("./style.css")  # noqa
     TEST_STYLESHEET = Stylesheet.read(filename)
-    print(TEST_STYLESHEET)
-    TEST_STYLESHEET2 = Stylesheet.read(filename)
-    test_sum = TEST_STYLESHEET + TEST_STYLESHEET2
-    print(test_sum.test)
-    #
+    print(TEST_STYLESHEET.__dict__.keys())
+    print(TEST_STYLESHEET.QDialog.__dict__.keys())
+    print(TEST_STYLESHEET.QDialog.test.__dict__.keys())

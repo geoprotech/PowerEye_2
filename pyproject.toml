@@ -27,6 +27,7 @@ multi_line_output = 3
 known_local_folder = ['bin', 'src', 'tests']
 extend_skip = ["*pypoetry*"]
 skip = ["__init__.py"]
+skip_glob = ["**/.env*", "**/env/*", "**/.venv/*", "**/tests/*", "**/etc/*"]
 
 [tool.mypy]
 strict_optional = true

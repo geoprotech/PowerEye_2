@@ -31,6 +31,18 @@ DEFAULT_BLOCK_NAME = "QWidget"
 
 
 class Stylesheet(str):
+    """
+    Class representing a framework allowing to convert .css files to .qss stylesheets, that can be used in Qt widgets
+    and windows.
+
+    Stylesheet inherent from base python str class. Thus, you can work with this class instances like you work with
+    strings.
+
+    Every Stylesheet instance consist of at least one StylesheetBlock(For example: QWidget {...})
+
+    Stylesheet instance can be defined directly from string or from a .css file(see 'read' method below).
+    """
+
     def __init__(self, template: str):
         self.template = template
         self._blocks: dict[str, StylesheetBlock] = {}
@@ -71,6 +83,21 @@ class Stylesheet(str):
 
 
 class StylesheetBlock(str):
+    """
+    As mentioned in Stylesheet docstring, every Stylesheet instance consist of at least one StylesheetBlock.
+
+    If there are more than one block with same name, and they have different ids corresponded StylesheetBlock instances
+    will be created and contained into main StylesheetBlock attributes. If ids are the same or None last definition
+    will be taken.
+
+    You can access every sub block by id and every css property by name.
+    For example:
+
+    STYLESHEET_NAME.QWidget
+    STYLESHEET_NAME.QWidget.PROPERTY_NAME
+    STYLESHEET_NAME.QWidget.SUB_BLOCK_ID.PROPERTY_NAME
+    """
+
     def __init__(self, template: str):
         self.template = template
         self._sub_blocks: dict[str, StylesheetBlock] = {}
@@ -113,4 +140,4 @@ if __name__ == "__main__":
     TEST_STYLESHEET = Stylesheet.read(filename)
     print(TEST_STYLESHEET.__dict__.keys())
     print(TEST_STYLESHEET.QDialog.__dict__.keys())
-    print(TEST_STYLESHEET.QDialog.test.__dict__.keys())
+    print(TEST_STYLESHEET.QWidget.test.__dict__.keys())

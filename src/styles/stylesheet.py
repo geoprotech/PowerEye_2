@@ -4,9 +4,10 @@ import logging
 from pathlib import Path
 
 import cssutils
+from style_constants import GLOBAL_STYLE_CONSTANTS
 
 from bin.exceptions import StylesheetException
-from style_constants import GLOBAL_STYLE_CONSTANTS
+
 
 cssutils.log.setLevel(logging.CRITICAL)
 
@@ -54,7 +55,9 @@ class Stylesheet(str):
         for rule in sheet:
             block_header = rule.selectorText
 
-            current_block_name = block_header.split()[0].split("::")[0] if len(block_header.split()) > 0 else DEFAULT_BLOCK_NAME
+            current_block_name = (
+                block_header.split()[0].split("::")[0] if len(block_header.split()) > 0 else DEFAULT_BLOCK_NAME
+            )
 
             if current_block_name not in self._blocks:
                 self._blocks[current_block_name] = StylesheetBlock(
@@ -68,17 +71,20 @@ class Stylesheet(str):
                     ineffective_header = block_header.split()[0].split("::")[0] + " " + block_header.split()[-1]
                     self._blocks[current_block_name].add_sub_block(
                         block_header.split()[-1].replace("#", ""),
-                        ineffective_header + " {\n" + rule.style.cssText + ";\n} \n")
+                        ineffective_header + " {\n" + rule.style.cssText + ";\n} \n",
+                    )
 
             if len(block_header.split()[0].split("::")) > 1:
                 try:
                     self._blocks[current_block_name].__dict__[block_header.split()[-1].replace("#", "")].add_sub_block(
                         block_header.split()[0].split("::")[-1].replace("-", "_"),
-                        block_header + " {\n" + rule.style.cssText + ";\n} \n")
+                        block_header + " {\n" + rule.style.cssText + ";\n} \n",
+                    )
                 except KeyError:
                     self._blocks[current_block_name].add_sub_block(
                         block_header.split()[0].split("::")[-1].replace("-", "_"),
-                        block_header + " {\n" + rule.style.cssText + ";\n} \n")
+                        block_header + " {\n" + rule.style.cssText + ";\n} \n",
+                    )
 
     @staticmethod
     def replace_constants(data: str):
@@ -153,13 +159,13 @@ class StylesheetBlock(str):
 if __name__ == "__main__":
     filename = Path("./style.css")  # noqa
     TEST_STYLESHEET = Stylesheet.read(filename)
-
+    # tests
     print(TEST_STYLESHEET.QWidget.__dict__.keys())
     print(TEST_STYLESHEET.QWidget.header.__dict__.keys())
     print(TEST_STYLESHEET.QWidget.header.hover.__dict__.keys())
     print(TEST_STYLESHEET.QWidget.__dict__.keys())
-    print("-"*100)
+    print("-" * 100)
     print(TEST_STYLESHEET.QDialog.__dict__.keys())
     print(TEST_STYLESHEET.QDialog.hover.__dict__.keys())
-    print("-"*100)
+    print("-" * 100)
     print(TEST_STYLESHEET)

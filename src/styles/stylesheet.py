@@ -6,7 +6,7 @@ from pathlib import Path
 import cssutils
 
 from bin.exceptions import StylesheetException
-
+from style_constants import GLOBAL_STYLE_CONSTANTS
 
 cssutils.log.setLevel(logging.CRITICAL)
 
@@ -54,31 +54,45 @@ class Stylesheet(str):
         for rule in sheet:
             block_header = rule.selectorText
 
-            current_block_name = block_header.split()[0] if len(block_header.split()) else DEFAULT_BLOCK_NAME
+            current_block_name = block_header.split()[0].split("::")[0] if len(block_header.split()) > 0 else DEFAULT_BLOCK_NAME
 
-            if current_block_name in self._blocks:
-                if len(block_header.split()) > 1:
-                    self._blocks[current_block_name].add_sub_block(
-                        block_header.split()[-1].replace("#", ""),
-                        block_header + " {\n" + rule.style.cssText + ";\n} \n",
-                    )
-                else:
-                    print(
-                        f"Warning! Duplicate name '{block_header.split()[0]}' for stylesheet in directory: "
-                        f"{Path(__file__).parent}, last definition will be used.",
-                        file=sys.stderr,
-                    )
-            else:
+            if current_block_name not in self._blocks:
                 self._blocks[current_block_name] = StylesheetBlock(
                     block_header + " {\n" + rule.style.cssText + ";\n} \n"
                 )
+
                 setattr(self, current_block_name, self._blocks[current_block_name])
+
+            if len(block_header.split()) > 1:
+                if not hasattr(self._blocks[current_block_name], block_header.split()[-1].replace("#", "")):
+                    ineffective_header = block_header.split()[0].split("::")[0] + " " + block_header.split()[-1]
+                    self._blocks[current_block_name].add_sub_block(
+                        block_header.split()[-1].replace("#", ""),
+                        ineffective_header + " {\n" + rule.style.cssText + ";\n} \n")
+
+            if len(block_header.split()[0].split("::")) > 1:
+                try:
+                    self._blocks[current_block_name].__dict__[block_header.split()[-1].replace("#", "")].add_sub_block(
+                        block_header.split()[0].split("::")[-1].replace("-", "_"),
+                        block_header + " {\n" + rule.style.cssText + ";\n} \n")
+                except KeyError:
+                    self._blocks[current_block_name].add_sub_block(
+                        block_header.split()[0].split("::")[-1].replace("-", "_"),
+                        block_header + " {\n" + rule.style.cssText + ";\n} \n")
+
+    @staticmethod
+    def replace_constants(data: str):
+        for key, value in GLOBAL_STYLE_CONSTANTS.items():
+            data = data.replace(key, str(value))
+
+        return data
 
     @classmethod
     def read(cls, file: Path):
         dir_path = file.parent
         with open(dir_path / Path("style.css")) as f:
             data = f.read()
+        data = Stylesheet.replace_constants(data)
         return cls(data)
 
 
@@ -121,10 +135,11 @@ class StylesheetBlock(str):
     def add_sub_block(self, sub_block_name: str, template: str) -> None:
         if sub_block_name in self._sub_blocks:
             print(
-                f"Warning! Duplicate name '{sub_block_name}' for stylesheet in directory: "
-                f"{Path(__file__).parent}, last definition will be used.",
+                f"Warning! Duplicate id '{sub_block_name}' for stylesheet in directory: "
+                f"{Path(__file__).parent}, first definition will be used.",
                 file=sys.stderr,
             )
+            return
 
         self._sub_blocks[sub_block_name] = StylesheetBlock(template)
         setattr(self, sub_block_name.replace("-", "_"), StylesheetBlock(template))
@@ -138,6 +153,13 @@ class StylesheetBlock(str):
 if __name__ == "__main__":
     filename = Path("./style.css")  # noqa
     TEST_STYLESHEET = Stylesheet.read(filename)
-    print(TEST_STYLESHEET.__dict__.keys())
+
+    print(TEST_STYLESHEET.QWidget.__dict__.keys())
+    print(TEST_STYLESHEET.QWidget.header.__dict__.keys())
+    print(TEST_STYLESHEET.QWidget.header.hover.__dict__.keys())
+    print(TEST_STYLESHEET.QWidget.__dict__.keys())
+    print("-"*100)
     print(TEST_STYLESHEET.QDialog.__dict__.keys())
-    print(TEST_STYLESHEET.QWidget.test.__dict__.keys())
+    print(TEST_STYLESHEET.QDialog.hover.__dict__.keys())
+    print("-"*100)
+    print(TEST_STYLESHEET)

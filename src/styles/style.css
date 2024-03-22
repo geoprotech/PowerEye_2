@@ -14,7 +14,7 @@ QWidget #header{
     max-height: 45px;
 }
 
-QWidget #test{
+QWidget::hover #header{
     custom-margin: 600px 500 20px;
     border-bottom: 1px solid #92D4D8;
     max-height: 45px;
@@ -25,20 +25,20 @@ QDialog{
     font-size: 20px;
     width: 100%;
     font-weight: 600px;
-    background-color: #28bfc9;
+    background-color: BASE_BACKGROUND_COLOR;
     height: 45px;
 
 
 }
 
-QDialog {
-    custom-margin: 600px 500 20px;
-    border-bottom: 1px solid #92D4D8;
-    max-height: 45px;
-}
+QDialog::hover {
+    custom-spacing: 5px;
+    font-size: 20px;
+    width: 100%;
+    font-weight: 600px;
+    font: BASE_FONT;
+    background-color: #28bfc9;
+    height: 45px;
 
-QDialog #test{
-    custom-margin: 1;
-    border-bottom: 1px;
-    max-height: 1px;
+
 }

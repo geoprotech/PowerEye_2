@@ -4,7 +4,7 @@ import PySide6.QtCore as QtCore
 import typing_extensions
 from PySide6.QtCore import Signal
 
-from bin.exceptions import StorageException
+from bin.exceptions.storage_exception import StorageException
 
 
 class StorageDataField(typing_extensions.TypedDict):

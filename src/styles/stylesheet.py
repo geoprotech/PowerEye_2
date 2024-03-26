@@ -1,6 +1,7 @@
 import re
 import sys
 import logging
+import warnings
 from pathlib import Path
 
 import cssutils
@@ -29,6 +30,8 @@ CUSTOM_OPTIONS = [
 ]
 
 DEFAULT_BLOCK_NAME = "QWidget"
+
+RE_STRIP_DIGITS = re.compile(r"\d+")
 
 
 class Stylesheet(str):
@@ -59,12 +62,7 @@ class Stylesheet(str):
                 block_header.split()[0].split("::")[0] if len(block_header.split()) > 0 else DEFAULT_BLOCK_NAME
             )
 
-            if current_block_name not in self._blocks:
-                self._blocks[current_block_name] = StylesheetBlock(
-                    block_header + " {\n" + rule.style.cssText + ";\n} \n"
-                )
-
-                setattr(self, current_block_name, self._blocks[current_block_name])
+            self.add_block(current_block_name, rule.style.cssText)
 
             if len(block_header.split()) > 1:
                 if not hasattr(self._blocks[current_block_name], block_header.split()[-1].replace("#", "")):
@@ -85,6 +83,12 @@ class Stylesheet(str):
                         block_header.split()[0].split("::")[-1].replace("-", "_"),
                         block_header + " {\n" + rule.style.cssText + ";\n} \n",
                     )
+
+    def add_block(self, block_name: str, block_content: str) -> None:
+        if block_name not in self._blocks:
+            self._blocks[block_name] = StylesheetBlock(block_name + " {\n" + block_content + ";\n} \n")
+
+            setattr(self, block_name, self._blocks[block_name])
 
     @staticmethod
     def replace_constants(data: str):
@@ -140,10 +144,9 @@ class StylesheetBlock(str):
 
     def add_sub_block(self, sub_block_name: str, template: str) -> None:
         if sub_block_name in self._sub_blocks:
-            print(
+            warnings.warn(
                 f"Warning! Duplicate id '{sub_block_name}' for stylesheet in directory: "
-                f"{Path(__file__).parent}, first definition will be used.",
-                file=sys.stderr,
+                f"{Path(__file__).parent}, first definition will be used."
             )
             return
 
@@ -151,9 +154,26 @@ class StylesheetBlock(str):
         setattr(self, sub_block_name.replace("-", "_"), StylesheetBlock(template))
 
     @staticmethod
-    def strip_units(string: str):
-        re_digits = re.compile(r"\d+")
-        return re_digits.findall(string)
+    def strip_units(string: str) -> int | str | list[int | str]:
+        string_result = RE_STRIP_DIGITS.findall(string)
+        final_result = []
+
+        if len(string_result) > 1:
+            for el in string_result:
+                try:
+                    final_result.append(int(el))
+                except ValueError:
+                    final_result.append(el)
+
+            return final_result
+
+        else:
+            try:
+                return int(string_result[0])
+            except ValueError:
+                return string_result[0]
+            except IndexError:
+                return string
 
 
 if __name__ == "__main__":

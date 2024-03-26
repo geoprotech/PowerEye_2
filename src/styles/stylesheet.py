@@ -174,18 +174,3 @@ class StylesheetBlock(str):
                 return string_result[0]
             except IndexError:
                 return string
-
-
-if __name__ == "__main__":
-    filename = Path("./style.css")  # noqa
-    TEST_STYLESHEET = Stylesheet.read(filename)
-    # tests
-    print(TEST_STYLESHEET.QWidget.__dict__.keys())
-    print(TEST_STYLESHEET.QWidget.header.__dict__.keys())
-    print(TEST_STYLESHEET.QWidget.header.hover.__dict__.keys())
-    print(TEST_STYLESHEET.QWidget.__dict__.keys())
-    print("-" * 100)
-    print(TEST_STYLESHEET.QDialog.__dict__.keys())
-    print(TEST_STYLESHEET.QDialog.hover.__dict__.keys())
-    print("-" * 100)
-    print(TEST_STYLESHEET)

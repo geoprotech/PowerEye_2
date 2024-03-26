@@ -13,6 +13,7 @@ pre-commit = "^3.6.0"
 isort = "^5.13.1"
 pep8-naming = "^0.13.3"
 flake8 = "^6.1.0"
+cssutils = "^2.9.0"
 asynciopyside6 = "^0.3.2"
 
 [tool.isort]
@@ -27,6 +28,7 @@ multi_line_output = 3
 known_local_folder = ['bin', 'src', 'tests']
 extend_skip = ["*pypoetry*"]
 skip = ["__init__.py"]
+skip_glob = ["**/.env*", "**/env/*", "**/.venv/*", "**/tests/*", "**/etc/*"]
 
 [tool.mypy]
 strict_optional = true
@@ -56,6 +58,7 @@ exclude = '''
     | \.pytest_cache
     | \.venv
     | venv
+    | .venv
     | backend_utils
   )/
 )

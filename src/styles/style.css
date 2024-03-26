@@ -1,0 +1,44 @@
+QWidget{
+    custom-spacing: 5px;
+    font-size: 20px;
+    width: 100%;
+    font-weight: 600px;
+    background-color: #28bfc9;
+    height: 45px;
+
+
+}
+QWidget #header{
+    custom-geometry: 500x300+500 500;
+    border-bottom: 1px solid #92D4D8;
+    max-height: 45px;
+}
+
+QWidget::hover #header{
+    custom-margin: 600px 500 20px;
+    border-bottom: 1px solid #92D4D8;
+    max-height: 45px;
+}
+
+QDialog{
+    custom-spacing: 5px;
+    font-size: 20px;
+    width: 100%;
+    font-weight: 600px;
+    background-color: BASE_BACKGROUND_COLOR;
+    height: 45px;
+
+
+}
+
+QDialog::hover {
+    custom-spacing: 5px;
+    font-size: 20px;
+    width: 100%;
+    font-weight: 600px;
+    font: BASE_FONT;
+    background-color: #28bfc9;
+    height: 45px;
+
+
+}
